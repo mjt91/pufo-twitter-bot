@@ -1,0 +1,11 @@
+{
+  "_template": "gh:cjolowicz/cookiecutter-hypermodern-python",
+  "author": "Marius Theiss",
+  "email": "justusbersten@gmail.com",
+  "friendly_name": "Pufo Twitter Bot",
+  "github_user": "mjt91",
+  "license": "MIT",
+  "package_name": "pufo_twitter_bot",
+  "project_name": "pufo-twitter-bot",
+  "version": "0.0.0"
+}
