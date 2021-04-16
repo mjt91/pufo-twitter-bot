@@ -3,6 +3,8 @@ import click
 
 from .authors.randomnames import random_authors
 
+from dataclasses import astuple, asdict
+
 
 @click.command()
 @click.option(
@@ -24,8 +26,10 @@ from .authors.randomnames import random_authors
 @click.version_option()
 def main(count: int, gender: str) -> None:
     """Pufo Twitter Bot."""
-    author_set = random_authors(count=count, gender=gender)
-    click.echo(author_set)
+    author_list = random_authors(count=count, gender=gender)
+
+    for i, author in enumerate(author_list.authors):
+        click.echo(f"{i+1}. Platz [TITLE PLACEHOLDER] von {author.firstname} {author.lastname}")
 
 
 if __name__ == "__main__":
