@@ -29,3 +29,9 @@ def test_main_invokes_requests_get(runner: CliRunner, mock_requests_get: Mock) -
     """It invokdes requests get."""
     runner.invoke(__main__.main)
     assert mock_requests_get.called
+
+def test_main_uses_count_and_gender(runner: CliRunner, mock_requests_get: Mock) -> None:
+    """It uses the English Wikipedia by default."""
+    runner.invoke(__main__.main)
+    args, _ = mock_requests_get.call_args
+    assert ("10" in args[0] and "a" in args[0])
