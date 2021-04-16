@@ -2,10 +2,13 @@
 from unittest.mock import Mock
 
 import click
+import desert
+import marshmallow
 import pytest
 
 from pufo_twitter_bot.authors import randomnames
-from pufo_twitter_bot.authors.randomnames import Ensemble, Author
+from pufo_twitter_bot.authors.randomnames import Author
+from pufo_twitter_bot.authors.randomnames import Ensemble
 
 
 def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
@@ -29,29 +32,34 @@ def test_trigger_typeguard(mock_requests_get: Mock) -> None:
     randomnames.random_authors(gender=data["gender"])
 
 
-def test_author_ressource():
-    data = {'firstname': 'Alice', 'lastname': "Wonderland"}
-    import desert
+def test_author_ressource_valid() -> None:
+    """It loads the correct author schema."""
+    data = {"firstname": "Alice", "lastname": "Wonderland"}
 
     schema = desert.schema(Author)
-
     author = schema.load(data)
-    assert author == Author(firstname='Alice', lastname="Wonderland")
+
+    assert author == Author(firstname="Alice", lastname="Wonderland")
 
 
-def test_authors_ensemble_ressource():
+def test_authors_ensemble_ressource_valid() -> None:
+    """It loads the correct ensemble schema."""
+
     data = {
-        'authors': [
-            {'firstname': 'Alice', 'lastname': "Wonderland"},
-            {'firstname': 'Bob', 'lastname': "Builder"}
+        "authors": [
+            {"firstname": "Alice", "lastname": "Wonderland", "age": 28},
+            {"firstname": "Bob", "lastname": "Builder", "age": 28},
         ]
-    }   
-
-    import desert
+    }
 
     # Create a schema for the Car class.
     schema = desert.schema(Ensemble)
 
     # Load the data.
     ensemble = schema.load(data)
-    assert ensemble == Ensemble(authors=[Author(firstname='Alice', lastname="Wonderland"), Author(firstname='Bob', lastname="Builder")])
+    assert ensemble == Ensemble(
+        authors=[
+            Author(firstname="Alice", lastname="Wonderland"),
+            Author(firstname="Bob", lastname="Builder"),
+        ]
+    )

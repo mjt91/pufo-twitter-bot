@@ -29,7 +29,13 @@ class Ensemble:
         authors: A list of authors from the author ressource.
 
     """
-    authors: List[Author]
+
+    authors: List[Author] = desert.field(
+        marshmallow_field=marshmallow.fields.Nested(
+            desert.schema(Author, meta={"unknown": marshmallow.EXCLUDE}, many=True),
+            required=True,
+        ),
+    )
 
 
 schema = desert.schema(Ensemble, meta={"unknown": marshmallow.EXCLUDE})
@@ -38,8 +44,19 @@ schema = desert.schema(Ensemble, meta={"unknown": marshmallow.EXCLUDE})
 API_URL: str = "https://randomname.de/?format=json&count={count}&gender={gender}"
 
 
-def random_authors(count: int = 10, gender: str = "a") -> List[Author]:
-    """Return a author set of size n."""
+def random_authors(count: int = 10, gender: str = "a") -> Ensemble:
+    """Return a author set of size n.
+
+    Args:
+        count (int, optional): [description]. Defaults to 10.
+        gender (str, optional): [description]. Defaults to "a".
+
+    Raises:
+        click.ClickException: [description]
+
+    Returns:
+        List[Author]: [description]
+    """
 
     url = API_URL.format(count=count, gender=gender)
 
@@ -49,7 +66,6 @@ def random_authors(count: int = 10, gender: str = "a") -> List[Author]:
             data = response.json()
 
             return schema.load({"authors": data})
-           
 
     except (requests.RequestException, marshmallow.ValidationError) as error:
         message = str(error)

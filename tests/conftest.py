@@ -1,8 +1,8 @@
 """Package-wide test fixtures."""
 from unittest.mock import Mock
 
-from _pytest.config import Config
 import pytest
+from _pytest.config import Config
 from pytest_mock import MockFixture
 
 
@@ -20,11 +20,6 @@ def mock_requests_get(mocker: MockFixture) -> Mock:
             "firstname": "Peter",
             "lastname": "Lorem",
         },
-        
-        {
-            "firstname": "Lisa",
-            "lastname": "Ipsum"
-        }
-
+        {"firstname": "Lisa", "lastname": "Ipsum"},
     ]
     return mock
