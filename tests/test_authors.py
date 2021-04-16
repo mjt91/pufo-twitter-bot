@@ -3,18 +3,17 @@ from unittest.mock import Mock
 
 import click
 import desert
-import marshmallow
 import pytest
 
 from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
-from pufo_twitter_bot.authors.randomnames import Ensemble
+from pufo_twitter_bot.authors.randomnames import AuthorList
 
 
 def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
     """It returns a ensemble of authors."""
     authors = randomnames.random_authors()
-    assert isinstance(authors, Ensemble)
+    assert isinstance(authors, AuthorList)
 
 
 def test_random_page_handles_validation_errors(mock_requests_get: Mock) -> None:
@@ -44,7 +43,6 @@ def test_author_ressource_valid() -> None:
 
 def test_authors_ensemble_ressource_valid() -> None:
     """It loads the correct ensemble schema."""
-
     data = {
         "authors": [
             {"firstname": "Alice", "lastname": "Wonderland", "age": 28},
@@ -53,11 +51,11 @@ def test_authors_ensemble_ressource_valid() -> None:
     }
 
     # Create a schema for the Car class.
-    schema = desert.schema(Ensemble)
+    schema = desert.schema(AuthorList)
 
     # Load the data.
     ensemble = schema.load(data)
-    assert ensemble == Ensemble(
+    assert ensemble == AuthorList(
         authors=[
             Author(firstname="Alice", lastname="Wonderland"),
             Author(firstname="Bob", lastname="Builder"),

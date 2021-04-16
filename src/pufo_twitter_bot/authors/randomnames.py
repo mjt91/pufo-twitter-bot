@@ -21,9 +21,12 @@ class Author:
     lastname: str
 
 
+AuthorSchema = desert.schema_class(Author, meta={"unknown": marshmallow.EXCLUDE})()
+
+
 @dataclass
-class Ensemble:
-    """Author Ensemble Ressource.
+class AuthorList:
+    """AuthorList Ressource.
 
     Attributes:
         authors: A list of authors from the author ressource.
@@ -31,33 +34,36 @@ class Ensemble:
     """
 
     authors: List[Author] = desert.field(
-        marshmallow_field=marshmallow.fields.Nested(
-            desert.schema(Author, meta={"unknown": marshmallow.EXCLUDE}, many=True),
-            required=True,
-        ),
-    )
+        marshmallow_field=marshmallow.fields.List(
+            marshmallow.fields.Nested(AuthorSchema)
+        )
+    )  # type: ignore
 
 
-schema = desert.schema(Ensemble, meta={"unknown": marshmallow.EXCLUDE})
+AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUDE})
 
 
 API_URL: str = "https://randomname.de/?format=json&count={count}&gender={gender}"
 
 
-def random_authors(count: int = 10, gender: str = "a") -> Ensemble:
+def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     """Return a author set of size n.
 
     Args:
-        count (int, optional): [description]. Defaults to 10.
-        gender (str, optional): [description]. Defaults to "a".
+        count (int): Decides the size of the returned set. Defaults to 10.
+        gender (str): Decides which gender names should be returned from the
+            'randomname.de REST API'. Possible options are:
+            f - generate only female names
+            m - generate only male names
+            b - generate both genders
+            a - generate all genders (some entries have no gender assinged)
 
     Raises:
-        click.ClickException: [description]
+        ClickException: raises the error message returned from the API.
 
     Returns:
-        List[Author]: [description]
+        AuthorList: A nested List of List[Author] (dataclass).
     """
-
     url = API_URL.format(count=count, gender=gender)
 
     try:
@@ -65,7 +71,7 @@ def random_authors(count: int = 10, gender: str = "a") -> Ensemble:
             response.raise_for_status()
             data = response.json()
 
-            return schema.load({"authors": data})
+            return AuthorListSchema.load({"authors": data})  # type: ignore
 
     except (requests.RequestException, marshmallow.ValidationError) as error:
         message = str(error)
