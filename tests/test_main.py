@@ -1,4 +1,6 @@
 """Test cases for the __main__ module."""
+from unittest.mock import Mock
+
 import pytest
 from click.testing import CliRunner
 
@@ -15,3 +17,9 @@ def test_main_succeeds(runner: CliRunner) -> None:
     """It exits with a status code of zero."""
     result = runner.invoke(__main__.main)
     assert result.exit_code == 0
+
+
+def test_main_prints_authors(runner: CliRunner, mock_requests_get: Mock) -> None:
+    """It prints the names of the authors."""
+    result = runner.invoke(__main__.main)
+    assert ("Peter Lorem" in result.output and "Lisa Ipsum" in result.output)
