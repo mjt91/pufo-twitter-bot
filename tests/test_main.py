@@ -23,3 +23,9 @@ def test_main_prints_authors(runner: CliRunner, mock_requests_get: Mock) -> None
     """It prints the names of the authors."""
     result = runner.invoke(__main__.main)
     assert ("Peter Lorem" in result.output and "Lisa Ipsum" in result.output)
+
+
+def test_main_invokes_requests_get(runner: CliRunner, mock_requests_get: Mock) -> None:
+    """It invokdes requests get."""
+    runner.invoke(console.main)
+    assert mock_requests_get.called
