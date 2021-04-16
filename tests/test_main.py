@@ -27,5 +27,5 @@ def test_main_prints_authors(runner: CliRunner, mock_requests_get: Mock) -> None
 
 def test_main_invokes_requests_get(runner: CliRunner, mock_requests_get: Mock) -> None:
     """It invokdes requests get."""
-    runner.invoke(console.main)
+    runner.invoke(__main__.main)
     assert mock_requests_get.called
