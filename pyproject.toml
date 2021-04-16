@@ -22,9 +22,12 @@ Changelog = "https://github.com/mjt91/pufo-twitter-bot/releases"
 python = "^3.6.1"
 click = "^7.0"
 requests = "^2.25.1"
+marshmallow = "^3.11.1"
+desert = "^2020.11.18"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"
+pytest-mock = "^3.5.1"
 coverage = {extras = ["toml"], version = "^5.4"}
 safety = "^1.10.3"
 mypy = "^0.812"

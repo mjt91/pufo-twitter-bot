@@ -1,6 +1,4 @@
 """Command-line interface."""
-import textwrap
-
 import click
 
 from .authors.randomnames import random_authors
@@ -27,8 +25,7 @@ from .authors.randomnames import random_authors
 def main(count: int, gender: str) -> None:
     """Pufo Twitter Bot."""
     author_set = random_authors(count=count, gender=gender)
-    print(author_set)
-    # click.echo(textwrap.fill(author_set))
+    click.echo(author_set)
 
 
 if __name__ == "__main__":
