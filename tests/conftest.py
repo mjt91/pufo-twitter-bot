@@ -26,3 +26,9 @@ def mock_requests_get(mocker: MockFixture) -> Mock:
         },
     ]
     return mock
+
+
+@pytest.fixture
+def mock_randomnames_random_authors(mocker: MockFixture) -> Mock:
+    """Fixture for mocking authors.randomname.random_authors."""
+    return mocker.patch("pufo_twitter_bot.authors.randomnames.random_authors")
