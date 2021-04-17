@@ -23,14 +23,6 @@ def test_random_page_handles_validation_errors(mock_requests_get: Mock) -> None:
         randomnames.random_authors()
 
 
-def test_trigger_typeguard(mock_requests_get: Mock) -> None:
-    """It triggers typeguard for invalid input."""
-    import json
-
-    data = json.loads('{ "gender": 1 }')
-    randomnames.random_authors(gender=data["gender"])
-
-
 def test_author_ressource_valid() -> None:
     """It loads the correct author schema."""
     data = {"firstname": "Alice", "lastname": "Wonderland"}
