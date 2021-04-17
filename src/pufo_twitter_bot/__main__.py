@@ -1,7 +1,4 @@
 """Command-line interface."""
-from dataclasses import asdict
-from dataclasses import astuple
-
 import click
 
 from .authors.randomnames import random_authors
