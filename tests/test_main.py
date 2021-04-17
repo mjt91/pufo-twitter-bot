@@ -23,7 +23,7 @@ def test_main_succeeds(runner: CliRunner) -> None:
 def test_main_prints_authors(runner: CliRunner, mock_requests_get: Mock) -> None:
     """It prints the names of the authors."""
     result = runner.invoke(__main__.main)
-    assert ("Peter Lorem" in result.output and "Lisa Ipsum" in result.output)
+    assert "Peter Lorem" in result.output and "Lisa Ipsum" in result.output
 
 
 def test_main_invokes_requests_get(runner: CliRunner, mock_requests_get: Mock) -> None:
@@ -36,7 +36,7 @@ def test_main_uses_count_and_gender(runner: CliRunner, mock_requests_get: Mock) 
     """It uses the English Wikipedia by default."""
     runner.invoke(__main__.main)
     args, _ = mock_requests_get.call_args
-    assert ("10" in args[0] and "a" in args[0])
+    assert "10" in args[0] and "a" in args[0]
 
 
 def test_main_fails_on_request_error(

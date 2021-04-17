@@ -1,9 +1,10 @@
 """Command-line interface."""
+from dataclasses import asdict
+from dataclasses import astuple
+
 import click
 
 from .authors.randomnames import random_authors
-
-from dataclasses import astuple, asdict
 
 
 @click.command()
@@ -29,7 +30,9 @@ def main(count: int, gender: str) -> None:
     author_list = random_authors(count=count, gender=gender)
 
     for i, author in enumerate(author_list.authors):
-        click.echo(f"{i+1}. Platz [TITLE PLACEHOLDER] von {author.firstname} {author.lastname}")
+        click.echo(
+            f"{i+1}. Platz [TITLE PLACEHOLDER] von {author.firstname} {author.lastname}"
+        )
 
 
 if __name__ == "__main__":

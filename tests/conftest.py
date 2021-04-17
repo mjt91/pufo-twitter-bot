@@ -20,10 +20,7 @@ def mock_requests_get(mocker: MockFixture) -> Mock:
             "firstname": "Peter",
             "lastname": "Lorem",
         },
-        {
-            "firstname": "Lisa",
-            "lastname": "Ipsum"
-        },
+        {"firstname": "Lisa", "lastname": "Ipsum"},
     ]
     return mock
 
