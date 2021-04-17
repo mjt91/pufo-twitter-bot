@@ -24,7 +24,7 @@ def test_random_page_handles_validation_errors(mock_requests_get: Mock) -> None:
 
 
 def test_author_ressource_valid() -> None:
-    """It loads the correct author schema."""
+    """It loads the correct Author schema."""
     data = {"firstname": "Alice", "lastname": "Wonderland"}
 
     schema = desert.schema(Author)
@@ -34,7 +34,7 @@ def test_author_ressource_valid() -> None:
 
 
 def test_authors_ensemble_ressource_valid() -> None:
-    """It loads the correct ensemble schema."""
+    """It loads the correct AuthorList schema."""
     data = {
         "authors": [
             {"firstname": "Alice", "lastname": "Wonderland", "age": 28},
