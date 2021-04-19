@@ -10,13 +10,13 @@ BOOK_URL = "https://www.buchtitelgenerator.de/"
 
 
 def get_booklist_from_html() -> List[str]:
-    """Retrieve a list of 5 random books from URL
+    """Retrieve a list of 5 random books from URL.
 
     Raises:
-        TypeError: If it fails to retrieve the books.
+        click.ClickException: shows the error if it fails to retrieve the books.
 
     Returns:
-        List[str]: list with 5 strings with book titles
+        List[str]: list with 5 strings with book titles.
     """
     try:
         with requests.get(BOOK_URL) as response:
