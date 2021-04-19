@@ -3,7 +3,7 @@ from typing import List
 
 import click
 import requests
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup  # type: ignore
 
 
 BOOK_URL = "https://www.buchtitelgenerator.de/"
