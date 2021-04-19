@@ -13,7 +13,7 @@ def get_booklist_from_html() -> List[str]:
     """Retrieve a list of 5 random books from URL.
 
     Raises:
-        click.ClickException: shows the error if it fails to retrieve the books.
+        ClickException: shows the error if it fails to retrieve the books.
 
     Returns:
         List[str]: list with 5 strings with book titles.
