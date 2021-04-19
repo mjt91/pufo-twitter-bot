@@ -42,7 +42,8 @@ Features
 Requirements
 ------------
 
-* TODO
+* python>=3.9
+* twitter devloper account (to post to twitter)
 
 
 Installation
@@ -85,8 +86,12 @@ please `file an issue`_ along with a detailed description.
 Credits
 -------
 
+Random author names generated from 
+
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
+.. buchtitelgenerator.de: https://www.buchtitelgenerator.de/
+.. _randomname.de: asdf.de
 .. _@cjolowicz: https://github.com/cjolowicz
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT license: https://opensource.org/licenses/MIT
