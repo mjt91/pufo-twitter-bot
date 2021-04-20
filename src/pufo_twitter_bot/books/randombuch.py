@@ -1,4 +1,4 @@
-"""Random book titles generator."""
+"""Random book titles generator from the buchtitelgenerator.de page."""
 from typing import List
 
 import click
@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup  # type: ignore
 BOOK_URL = "https://www.buchtitelgenerator.de/"
 
 
-def get_booklist_from_html() -> List[str]:
+def buchtitelgenerator() -> List[str]:
     """Retrieve a list of 5 random books from URL.
 
     Raises:
@@ -34,5 +34,5 @@ def get_booklist_from_html() -> List[str]:
 
 
 if __name__ == "__main__":
-    books = get_booklist_from_html()
+    books = buchtitelgenerator()
     print(books)
