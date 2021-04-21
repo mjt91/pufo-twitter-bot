@@ -16,7 +16,7 @@ from pufo_twitter_bot.authors.randomnames import AuthorList
 DATAPATH: str = "../../../data/first-names-merged.csv"
 
 
-def merge_csvs():
+def merge_csvs() -> None:
     """Helper function to merge all  offenedaten-köln csv files into one."""
     csv_list = glob.glob("../../../data/*.csv")
 
@@ -38,7 +38,7 @@ def merge_csvs():
                     writer.writerow(row)
 
 
-def create_first_names_data():
+def create_first_names_data() -> None:
     """Helper function to create the data from all Vornamen files."""
     # load data from file path
     fpath = Path(DATAPATH)
@@ -64,11 +64,13 @@ def create_first_names_data():
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
 
+# Load the schemas for Author and AuthorList
+
 AuthorSchema = desert.schema_class(Author, meta={"unknown": marshmallow.EXCLUDE})()
 AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUDE})
 
 
-def random_authors(count: int = 10, gender: str = "a"):
+def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     """Return a author set of size n.
 
     The function is using the fallback data in the data folder (on top level).
