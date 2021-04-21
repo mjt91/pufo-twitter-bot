@@ -71,6 +71,9 @@ AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUD
 def random_authors(count: int = 10, gender: str = "a"):
     """Return a author set of size n.
 
+    The function is using the fallback data in the data folder (on top level).
+    It loads the first names from 'first-names.json' and 'last-names.txt'.
+
     Args:
         count (int): Decides the size of the returned set. Defaults to 10.
         gender (str): Decides which gender names should be returned from the
@@ -81,13 +84,19 @@ def random_authors(count: int = 10, gender: str = "a"):
     Returns:
         AuthorList: A nested List of List[Author] (dataclass).
     """
-    with open("../../../data/first-names.json", "r") as file:
-        first_names = json.load(file)
+    with open("../../../data/first-names.json", "r") as ffile, open(
+        "../../../data/last-names.txt", "r"
+    ) as lfile:
+        first_names = json.load(ffile)
+        last_names = lfile.read().splitlines()
+
+        rnd_sample_last_names = random.sample(last_names, count)
+        print(rnd_sample_last_names)
         rnd_sample_keys = random.sample(list(first_names.keys()), count)
 
         first_names_list = []
-        for key in rnd_sample_keys:
-            fnames_dict = {"firstname": first_names[key][0], "lastname": "Mustermann"}
+        for key, last_name in zip(rnd_sample_keys, rnd_sample_last_names):
+            fnames_dict = {"firstname": first_names[key][0], "lastname": last_name}
             first_names_list.append(fnames_dict)
 
         return AuthorListSchema.load({"authors": first_names_list})
@@ -106,4 +115,4 @@ if __name__ == "__main__":
         print("Created json file with unique names")
         create_first_names_data()
 
-    random_authors()
+    print(random_authors())
