@@ -93,9 +93,8 @@ Credits
 
 Random author names generated from two origins:
 
-* `_randomname.de`_
-[randomname.de]()
-* [offenedaten-köln.de](https://offenedaten-koeln.de/)
+* randomname.de_
+* offenedaten-koeln_
 
 The names data is distributed under the Creative Commons license (see: [cc licenses](https://github.com/santisoler/cc-licenses)
 
@@ -103,6 +102,7 @@ This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter
 
 .. buchtitelgenerator.de: https://www.buchtitelgenerator.de/
 .. _randomname.de: https://randomname.de/
+.. _offenedaten-koeln: (https://offenedaten-koeln.de/)
 .. _@cjolowicz: https://github.com/cjolowicz
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT license: https://opensource.org/licenses/MIT
