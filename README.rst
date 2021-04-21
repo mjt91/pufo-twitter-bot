@@ -91,6 +91,10 @@ please `file an issue`_ along with a detailed description.
 Credits
 -------
 
+Random book titles are taken from `buchtitelgenerator.de`_
+This project would not be possible without the authors of this site for
+letting me use their data. Herewith I express my deepest thanks.
+
 Random author names generated from two origins:
 
 * randomname.de_
@@ -100,9 +104,9 @@ The names data is distributed under the Creative Commons license (see: [cc licen
 
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
-.. buchtitelgenerator.de: https://www.buchtitelgenerator.de/
+.. _buchtitelgenerator.de: https://www.buchtitelgenerator.de/
 .. _randomname.de: https://randomname.de/
-.. _offenedaten-koeln: (https://offenedaten-koeln.de/)
+.. _offenedaten-koeln: https://offenedaten-koeln.de/
 .. _@cjolowicz: https://github.com/cjolowicz
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT license: https://opensource.org/licenses/MIT
