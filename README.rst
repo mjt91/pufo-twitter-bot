@@ -36,7 +36,12 @@ Pufo Twitter Bot
 Features
 --------
 
-* TODO
+* Creates a list of random book titels and author combinations
+* Parameters to tune are 
+   * `count` for number of author/titles
+   * `gender` for the gender of the authors
+   
+Book titles are in german for now.
 
 
 Requirements
@@ -86,7 +91,12 @@ please `file an issue`_ along with a detailed description.
 Credits
 -------
 
-Random author names generated from 
+Random author names generated from two origins:
+
+* [randomname.de](https://randomname.de/)
+* [offenedaten-köln.de](https://offenedaten-koeln.de/)
+
+The names data is distributed under the Creative Commons license (see: [cc licenses](https://github.com/santisoler/cc-licenses)
 
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
