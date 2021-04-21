@@ -29,7 +29,7 @@ def merge_csvs() -> None:
     result_name = "../../../data/first-names-merged.csv"
 
     with open(result_name, "w+", newline="") as outfile:
-        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)  # type: ignore
         writer.writeheader()
         for file in csv_list:
             with open(file, newline="") as theread:
@@ -101,13 +101,14 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
             fnames_dict = {"firstname": first_names[key][0], "lastname": last_name}
             first_names_list.append(fnames_dict)
 
-        return AuthorListSchema.load({"authors": first_names_list})
+    return AuthorListSchema.load({"authors": first_names_list})  # type: ignore
 
 
 if __name__ == "__main__":
 
     csv_files = [os.path.basename(x) for x in glob.glob("../../../data/*.csv")]
     json_files = [os.path.basename(x) for x in glob.glob("../../../data/*.json")]
+    merge_csvs()
 
     if "first-names-merged.csv" not in csv_files:
         print("Created merged csv file with all first names")
