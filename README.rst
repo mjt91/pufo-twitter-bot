@@ -86,7 +86,7 @@ please `file an issue`_ along with a detailed description.
 Credits
 -------
 
-Random author names generated from 
+Random author names generated from
 
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
