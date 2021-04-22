@@ -61,7 +61,7 @@ def test_authors_ensemble_ressource_valid() -> None:
 def test_random_authors_fallback() -> None:
     """The test authors are generated from the fallback file."""
     # set random seed to ensure testability
-    random.seed(1337)
+    random.seed(1)
 
     author_list = opendatanames.random_authors(
         first_names_json_path="./data/first-names-test.json",
@@ -69,4 +69,4 @@ def test_random_authors_fallback() -> None:
         count=1,
     )
 
-    assert Author("Lorem", "Ipsum") in author_list
+    assert Author(firstname="Lorem", lastname="Ipsum") in author_list.authors
