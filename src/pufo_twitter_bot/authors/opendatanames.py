@@ -5,6 +5,7 @@ import json
 import os
 import random
 from pathlib import Path
+from typing import Union
 
 import desert
 import marshmallow
@@ -70,13 +71,22 @@ AuthorSchema = desert.schema_class(Author, meta={"unknown": marshmallow.EXCLUDE}
 AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUDE})
 
 
-def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
+def random_authors(
+    first_names_json_path: Union[str, Path] = "../../../data/first-names.json",
+    last_names_text_path: Union[str, Path] = "../../../data/last-names.txt",
+    count: int = 10,
+    gender: str = "a",
+) -> AuthorList:
     """Return a author set of size n.
 
     The function is using the fallback data in the data folder (on top level).
     It loads the first names from 'first-names.json' and 'last-names.txt'.
 
     Args:
+        first_names_json_path (Union[str, Path]): path or file string to the
+            first names file. Defaults to '../../../data/first-names.json'.
+        last_names_text_path (Union[str, Path]): path or file string to the
+            last names text file. Defaults to '../../../data/last-names.txt'
         count (int): Decides the size of the returned set. Defaults to 10.
         gender (str): Decides which gender names should be returned from the
             'data json files'. Possible options are:
@@ -92,8 +102,8 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     Returns:
         AuthorList: A nested List of List[Author] (dataclass).
     """
-    with open("../../../data/first-names.json", "r") as ffile, open(
-        "../../../data/last-names.txt", "r"
+    with open(first_names_json_path, "r") as ffile, open(
+        last_names_text_path, "r"
     ) as lfile:
         first_names = json.load(ffile)
         last_names = lfile.read().splitlines()
