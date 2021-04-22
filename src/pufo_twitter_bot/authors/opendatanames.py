@@ -80,6 +80,7 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
         count (int): Decides the size of the returned set. Defaults to 10.
         gender (str): Decides which gender names should be returned from the
             'data json files'. Possible options are:
+            a - generate authors from both genders
             w - generate only female names
             m - generate only male names
 
@@ -93,8 +94,15 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
         last_names = lfile.read().splitlines()
 
         rnd_sample_last_names = random.sample(last_names, count)
-        print(rnd_sample_last_names)
-        rnd_sample_keys = random.sample(list(first_names.keys()), count)
+
+        if gender == "a":
+            rnd_sample_keys = random.sample(list(first_names.keys()), count)
+        elif gender == "w":
+            pass
+        elif gender == "m":
+            pass
+        else:
+            raise ValueError("Gender must be either of 'a', 'w' or 'm'")
 
         first_names_list = []
         for key, last_name in zip(rnd_sample_keys, rnd_sample_last_names):
