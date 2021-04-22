@@ -1,5 +1,6 @@
 """Test cases for the authors module."""
 from unittest.mock import Mock
+import random
 
 import click
 import desert
@@ -8,6 +9,8 @@ import pytest
 from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
+
+from pufo_twitter_bot.authors import opendatanames
 
 
 def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
@@ -53,3 +56,17 @@ def test_authors_ensemble_ressource_valid() -> None:
             Author(firstname="Bob", lastname="Builder"),
         ]
     )
+
+
+def test_random_authors_fallback() -> None:
+    """The test authors are generated from the fallback file."""
+    # set random seed to ensure testability
+    random.seed(1337)
+
+    author_list = opendatanames.random_authors(
+        first_names_json_path="./data/first-names-test.json",
+        last_names_text_path="./data/last-names-test.txt",
+        count=1,
+    )
+
+    assert Author("Lorem", "Ipsum") in author_list
