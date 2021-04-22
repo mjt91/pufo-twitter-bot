@@ -39,6 +39,34 @@ class AuthorList:
         )
     )  # type: ignore
 
+    def __iter__(self):
+        ''' Returns the Iterator object '''
+        print(self)
+        print(self.authors)
+        print(len(self.authors))
+        return AuthorListIterator(self)
+
+
+class AuthorListIterator:
+    ''' Iterator class '''
+    def __init__(self, authorlist):
+
+        # Team object reference
+        self._authors = authorlist.authors
+        # member variable to keep track of current index
+        self._index = 0
+
+    def __next__(self):
+        ''''Returns the next value from team object's lists '''
+        if self._index < len(self._authors):
+            result = self._authors[self._index]
+
+            self._index += 1
+            return result
+
+        # End of Iteration
+        raise StopIteration
+
 
 AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUDE})
 
