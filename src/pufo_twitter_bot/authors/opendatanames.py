@@ -14,12 +14,12 @@ from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
 
 
-DATAPATH: str = "../../../data/first-names-merged.csv"
+DATAPATH: str = "../../../data/"
 
 
 def merge_csvs() -> None:
     """Helper function to merge all  offenedaten-köln csv files into one."""
-    csv_list = glob.glob("../../../data/*.csv")
+    csv_list = glob.glob(DATAPATH + "*.csv")
 
     # get fieldnames
     with open(csv_list[0], newline="") as csvfile:
@@ -27,7 +27,7 @@ def merge_csvs() -> None:
         fieldnames = reader.fieldnames
 
     # merge
-    result_name = "../../../data/first-names-merged.csv"
+    result_name = DATAPATH + "first-names-merged.csv"
 
     with open(result_name, "w+", newline="") as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)  # type: ignore
@@ -42,7 +42,7 @@ def merge_csvs() -> None:
 def create_first_names_data() -> None:
     """Helper function to create the data from all Vornamen files."""
     # load data from file path
-    fpath = Path(DATAPATH)
+    fpath = Path(DATAPATH + "first-names-merged.csv")
 
     # create output file dict and set (for unique names)
     names_dict = {}
@@ -61,7 +61,7 @@ def create_first_names_data() -> None:
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
 
-    with open("../../../data/first-names.json", "w", encoding="utf-8") as file:
+    with open(DATAPATH + "first-names.json", "w", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
 
@@ -132,8 +132,8 @@ def random_authors(
 
 if __name__ == "__main__":
 
-    csv_files = [os.path.basename(x) for x in glob.glob("../../../data/*.csv")]
-    json_files = [os.path.basename(x) for x in glob.glob("../../../data/*.json")]
+    csv_files = [os.path.basename(x) for x in glob.glob(DATAPATH + "*.csv")]
+    json_files = [os.path.basename(x) for x in glob.glob(DATAPATH + "*.json")]
 
     if "first-names-merged.csv" not in csv_files:
         print("Created merged csv file with all first names")
