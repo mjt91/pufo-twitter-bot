@@ -40,24 +40,27 @@ class AuthorList:
     )  # type: ignore
 
     def __iter__(self):
-        ''' Returns the Iterator object '''
-        print(self)
-        print(self.authors)
-        print(len(self.authors))
+        """Returns the AuthorList iterator object."""
         return AuthorListIterator(self)
 
 
 class AuthorListIterator:
-    ''' Iterator class '''
-    def __init__(self, authorlist):
+    """Iterator class for AuthorList."""
 
-        # Team object reference
+    def __init__(self, authorlist):
+        """Constructor for the AuthorList iterator class.
+
+        Create a reference for the Authors in the AuthorList object.
+        Initialize the index to zero for iterator loop.
+
+        Args:
+            authorlist (AujthorList): AuthorList object reference
+        """
         self._authors = authorlist.authors
-        # member variable to keep track of current index
         self._index = 0
 
     def __next__(self):
-        ''''Returns the next value from team object's lists '''
+        """Returns the next author from the authorlist object."""
         if self._index < len(self._authors):
             result = self._authors[self._index]
 
