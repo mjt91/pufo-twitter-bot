@@ -84,6 +84,11 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
             w - generate only female names
             m - generate only male names
 
+    Raises:
+        ValueError: the first names dict (first-names.json) gets parsed and
+            filtered on the gender column. value error gets raised when gender
+            is not in [a, w, m].
+
     Returns:
         AuthorList: A nested List of List[Author] (dataclass).
     """
@@ -92,15 +97,18 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     ) as lfile:
         first_names = json.load(ffile)
         last_names = lfile.read().splitlines()
-
         rnd_sample_last_names = random.sample(last_names, count)
 
         if gender == "a":
             rnd_sample_keys = random.sample(list(first_names.keys()), count)
         elif gender == "w":
-            pass
+            first_names_w = {k: v for k, v in first_names.items() if v[1] == "w"}
+            rnd_sample_keys = random.sample(list(first_names_w.keys()), count)
+
         elif gender == "m":
-            pass
+            first_names_m = {k: v for k, v in first_names.items() if v[1] == "m"}
+            rnd_sample_keys = random.sample(list(first_names_m.keys()), count)
+
         else:
             raise ValueError("Gender must be either of 'a', 'w' or 'm'")
 
@@ -116,7 +124,6 @@ if __name__ == "__main__":
 
     csv_files = [os.path.basename(x) for x in glob.glob("../../../data/*.csv")]
     json_files = [os.path.basename(x) for x in glob.glob("../../../data/*.json")]
-    merge_csvs()
 
     if "first-names-merged.csv" not in csv_files:
         print("Created merged csv file with all first names")
@@ -126,4 +133,5 @@ if __name__ == "__main__":
         print("Created json file with unique names")
         create_first_names_data()
 
-    print(random_authors())
+    authors = random_authors()
+    print(authors)
