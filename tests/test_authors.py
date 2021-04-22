@@ -1,16 +1,15 @@
 """Test cases for the authors module."""
-from unittest.mock import Mock
 import random
+from unittest.mock import Mock
 
 import click
 import desert
 import pytest
 
+from pufo_twitter_bot.authors import opendatanames
 from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
-
-from pufo_twitter_bot.authors import opendatanames
 
 
 def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
