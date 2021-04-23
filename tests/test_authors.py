@@ -123,38 +123,36 @@ def test_random_authors_fallback() -> None:
 
 def test_random_authors_fallback_gender_m() -> None:
     """It returns only the male authors."""
-    # set random seed to ensure testability
-    random.seed(2)
-
     author_list = opendatanames.random_authors(
         first_names_json_path="./tests/data/first-names-test.json",
         last_names_text_path="./tests/data/last-names-test.txt",
         count=1,
         gender="m",
     )
-    result_list = [
-        Author(firstname="Lorem", lastname="Ipsum"),
-    ]
 
-    assert result_list == author_list.authors
+    assert author_list.authors[0].firstname == "Lorem"
 
 
 def test_random_authors_fallback_gender_w() -> None:
     """It returns only the female authors."""
-    # set random seed to ensure testability
-    random.seed(2)
-
     author_list = opendatanames.random_authors(
         first_names_json_path="./tests/data/first-names-test.json",
         last_names_text_path="./tests/data/last-names-test.txt",
         count=1,
         gender="w",
     )
-    result_list = [
-        Author(firstname="Dolor", lastname="Ipsum"),
-    ]
 
-    assert result_list == author_list.authors
+    assert author_list.authors[0].firstname == "Dolor"
+
+
+def test_random_authors_fallback_fails_with_unknown_gender() -> None:
+    """It fails to get the authors."""
+    with pytest.raises(ValueError):
+        opendatanames.random_authors(
+            first_names_json_path="./tests/data/first-names-test.json",
+            last_names_text_path="./tests/data/last-names-test.txt",
+            gender="r",
+        )
 
 
 def test_merge_csvs() -> None:

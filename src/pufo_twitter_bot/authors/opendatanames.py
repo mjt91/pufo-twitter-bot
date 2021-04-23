@@ -50,6 +50,7 @@ def create_first_names_data() -> None:
 
     with open(fpath, "r", encoding="utf-8") as f:
         for i, line in enumerate(f):
+            # skip header row
             if i == 0:
                 pass
             else:
@@ -123,17 +124,18 @@ def random_authors(
         rnd_sample_last_names = random.sample(last_names, count)
 
         if gender == "a":
+            print("I am in a")
             rnd_sample_keys = random.sample(list(first_names.keys()), count)
-        elif gender == "w":
+
+        if gender == "w":
+            print("I am in w")
             first_names_w = {k: v for k, v in first_names.items() if v[1] == "w"}
             rnd_sample_keys = random.sample(list(first_names_w.keys()), count)
 
-        elif gender == "m":
+        if gender == "m":
+            print("I am in m")
             first_names_m = {k: v for k, v in first_names.items() if v[1] == "m"}
             rnd_sample_keys = random.sample(list(first_names_m.keys()), count)
-
-        else:
-            raise ValueError("Gender must be either of 'a', 'w' or 'm'")
 
         first_names_list = []
         for key, last_name in zip(rnd_sample_keys, rnd_sample_last_names):
