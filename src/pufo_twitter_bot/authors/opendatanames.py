@@ -61,8 +61,7 @@ def create_first_names_data() -> None:
                 if name not in unique_names:
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
-
-    with open(DATAPATH + "first-names.json", "w", encoding="utf-8") as file:
+    with open(DATAPATH + "first-names.json", "w+", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
 
