@@ -1,7 +1,7 @@
 """Test cases for the authors module."""
 import random
-from unittest.mock import Mock
 from collections.abc import Iterable
+from unittest.mock import Mock
 
 import click
 import desert
@@ -60,56 +60,41 @@ def test_authors_ensemble_ressource_valid() -> None:
 
 
 def test_authorlist_iterable() -> None:
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
+    """The AuthorList is of type Iterable."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     assert isinstance(author_list, Iterable)
 
 
 def test_authorlistiterator_init() -> None:
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
-    assert hasattr(author_list, "__iter__")  
+    """The AuthorListIterator has an constructor."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
+    assert hasattr(author_list, "__iter__")
 
 
 def test_authorlistiterator_has_next() -> None:
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
+    """The AuthorListIterator has __next__ method."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     author_list_iterator = AuthorListIterator(author_list)
     assert hasattr(author_list_iterator, "__next__")
 
 
 def test_authorlistiter_returns_iteratorcls() -> None:
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
-
+    """Iter of AuthorList returns the iterator."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     assert isinstance(iter(author_list), AuthorListIterator)
 
 
 def test_authorlistiter_next_returns_next_author():
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
+    """The next method returns the next Author from AuthorList."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     author_list_iterator = iter(author_list)
-
     assert next(author_list_iterator) == Author("Lorem", "Ipsum")
 
 
 def test_authorlistiter_stops():
-    author_list = AuthorList(authors=[
-        Author("Lorem", "Ipsum")
-    ]
-    )
+    """It stops after the last Author."""
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     author_list_iterator = iter(author_list)
-
     _ = next(author_list_iterator) == Author("Lorem", "Ipsum")
 
     with pytest.raises(StopIteration):
