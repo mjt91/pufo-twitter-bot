@@ -72,10 +72,10 @@ AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUD
 
 
 def random_authors(
-    first_names_json_path: Union[str, Path] = "../../../data/first-names.json",
-    last_names_text_path: Union[str, Path] = "../../../data/last-names.txt",
     count: int = 10,
     gender: str = "a",
+    first_names_json_path: Union[str, Path] = None,
+    last_names_text_path: Union[str, Path] = None,
 ) -> AuthorList:
     """Return a author set of size n.
 
@@ -83,10 +83,12 @@ def random_authors(
     It loads the first names from 'first-names.json' and 'last-names.txt'.
 
     Args:
-        first_names_json_path (Union[str, Path]): path or file string to the
-            first names file. Defaults to '../../../data/first-names.json'.
-        last_names_text_path (Union[str, Path]): path or file string to the
-            last names text file. Defaults to '../../../data/last-names.txt'
+        first_names_json_path (Union[str, Path]): path or file string to another
+            first names file. Defaults to None. Will take the data files from
+            the top level data folder if None.
+        last_names_text_path (Union[str, Path]): path or file string to another
+            last names text file. Defaults to None. Will take the data files from
+            the top level data folder if None.
         count (int): Decides the size of the returned set. Defaults to 10.
         gender (str): Decides which gender names should be returned from the
             'data json files'. Possible options are:
@@ -102,6 +104,17 @@ def random_authors(
     Returns:
         AuthorList: A nested List of List[Author] (dataclass).
     """
+    first_names_json_path = (
+        first_names_json_path
+        if first_names_json_path is not None
+        else Path("../../../data/first-names.json")
+    )
+    last_names_text_path = (
+        last_names_text_path
+        if last_names_text_path is not None
+        else Path("../../../data/last-names.txt")
+    )
+
     with open(first_names_json_path, "r") as ffile, open(
         last_names_text_path, "r"
     ) as lfile:
