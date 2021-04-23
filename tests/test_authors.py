@@ -106,15 +106,55 @@ def test_authorlistiter_stops():
 def test_random_authors_fallback() -> None:
     """The test authors are generated from the fallback file."""
     # set random seed to ensure testability
-    random.seed(1)
+    random.seed(2)
+
+    author_list = opendatanames.random_authors(
+        first_names_json_path="./tests/data/first-names-test.json",
+        last_names_text_path="./tests/data/last-names-test.txt",
+        count=2,
+    )
+    result_list = [
+        Author(firstname="Lorem", lastname="Ipsum"),
+        Author(firstname="Dolor", lastname="Sit-Amit"),
+    ]
+
+    assert result_list == author_list.authors
+
+
+def test_random_authors_fallback_gender_m() -> None:
+    """It returns only the male authors."""
+    # set random seed to ensure testability
+    random.seed(2)
 
     author_list = opendatanames.random_authors(
         first_names_json_path="./tests/data/first-names-test.json",
         last_names_text_path="./tests/data/last-names-test.txt",
         count=1,
+        gender="m",
     )
+    result_list = [
+        Author(firstname="Lorem", lastname="Ipsum"),
+    ]
 
-    assert Author(firstname="Lorem", lastname="Ipsum") in author_list.authors
+    assert result_list == author_list.authors
+
+
+def test_random_authors_fallback_gender_w() -> None:
+    """It returns only the female authors."""
+    # set random seed to ensure testability
+    random.seed(2)
+
+    author_list = opendatanames.random_authors(
+        first_names_json_path="./tests/data/first-names-test.json",
+        last_names_text_path="./tests/data/last-names-test.txt",
+        count=1,
+        gender="w",
+    )
+    result_list = [
+        Author(firstname="Dolor", lastname="Ipsum"),
+    ]
+
+    assert result_list == author_list.authors
 
 
 def test_merge_csvs() -> None:
