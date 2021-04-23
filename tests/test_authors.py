@@ -1,8 +1,6 @@
 """Test cases for the authors module."""
-import os
 import random
 from collections.abc import Iterable
-from unittest import mock
 from unittest.mock import Mock
 
 import click
@@ -153,15 +151,3 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
             last_names_text_path="./tests/data/last-names-test.txt",
             gender="r",
         )
-
-
-def test_merge_csvs() -> None:
-    """It merges all csvs in the input directory."""
-    fname = "./tests/data/first-names-merged.csv"
-    if os.path.isfile(fname):
-        os.remove(fname)
-
-    with mock.patch("pufo_twitter_bot.authors.opendatanames.DATAPATH", "./tests/data/"):
-        opendatanames.merge_csvs()
-
-    assert os.path.isfile(fname)
