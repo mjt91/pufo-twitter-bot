@@ -1,7 +1,7 @@
 """Test cases for the authors module."""
 import random
 from unittest.mock import Mock
-from collections import Iterable
+from collections.abc import Iterable
 
 import click
 import desert
@@ -75,14 +75,55 @@ def test_authorlistiterator_init() -> None:
     assert hasattr(author_list, "__iter__")  
 
 
+def test_authorlistiterator_has_next() -> None:
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+    author_list_iterator = AuthorListIterator(author_list)
+    assert hasattr(author_list_iterator, "__next__")
+
+
+def test_authorlistiter_returns_iteratorcls() -> None:
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+
+    assert isinstance(iter(author_list), AuthorListIterator)
+
+
+def test_authorlistiter_next_returns_next_author():
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+    author_list_iterator = iter(author_list)
+
+    assert next(author_list_iterator) == Author("Lorem", "Ipsum")
+
+
+def test_authorlistiter_stops():
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+    author_list_iterator = iter(author_list)
+
+    _ = next(author_list_iterator) == Author("Lorem", "Ipsum")
+
+    with pytest.raises(StopIteration):
+        next(author_list_iterator)
+
+
 def test_random_authors_fallback() -> None:
     """The test authors are generated from the fallback file."""
     # set random seed to ensure testability
     random.seed(1)
 
     author_list = opendatanames.random_authors(
-        first_names_json_path="./data/first-names-test.json",
-        last_names_text_path="./data/last-names-test.txt",
+        first_names_json_path="./tests/data/first-names-test.json",
+        last_names_text_path="./tests/data/last-names-test.txt",
         count=1,
     )
 
