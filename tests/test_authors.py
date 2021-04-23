@@ -1,6 +1,7 @@
 """Test cases for the authors module."""
 import random
 from unittest.mock import Mock
+from collections import Iterable
 
 import click
 import desert
@@ -10,6 +11,7 @@ from pufo_twitter_bot.authors import opendatanames
 from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
+from pufo_twitter_bot.authors.randomnames import AuthorListIterator
 
 
 def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
@@ -55,6 +57,22 @@ def test_authors_ensemble_ressource_valid() -> None:
             Author(firstname="Bob", lastname="Builder"),
         ]
     )
+
+
+def test_authorlist_iterable() -> None:
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+    assert isinstance(author_list, Iterable)
+
+
+def test_authorlistiterator_init() -> None:
+    author_list = AuthorList(authors=[
+        Author("Lorem", "Ipsum")
+    ]
+    )
+    assert hasattr(author_list, "__iter__")  
 
 
 def test_random_authors_fallback() -> None:

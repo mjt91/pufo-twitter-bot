@@ -14,7 +14,7 @@ class Author:
 
     Attributes:
         firstname: Firstname of the author.
-        lastname: Surname of the author.
+        lastname: Lastname of the author.
     """
 
     firstname: str
@@ -56,18 +56,17 @@ class AuthorListIterator:
         Args:
             authorlist (AujthorList): AuthorList object reference
         """
-        self._authors = authorlist.authors
-        self._index = 0
+        self._authors: list = authorlist.authors
+        self._index: int = 0
 
     def __next__(self):
-        """Returns the next author from the authorlist object."""
+        """Returns the next author from the AuthorList list."""
         if self._index < len(self._authors):
-            result = self._authors[self._index]
+            result: Author = self._authors[self._index]
 
             self._index += 1
             return result
 
-        # End of Iteration
         raise StopIteration
 
 
