@@ -17,19 +17,22 @@ from pufo_twitter_bot.authors.randomnames import AuthorList
 DATAPATH: str = "../../../data/"
 
 
-def merge_csvs() -> None:
+def merge_csvs(out_file: Union[str, Path] = None, input_path: Union[str, Path] = None) -> None:
     """Helper function to merge all  offenedaten-köln csv files into one."""
-    csv_list = glob.glob(DATAPATH + "*.csv")
+    # define input path or default to DATAPATH constant
+    input_path = input_path if input_path is not None else DATAPATH
+
+    csv_list = glob.glob(input_path + "*.csv")
 
     # get fieldnames
     with open(csv_list[0], newline="") as csvfile:
         reader = csv.DictReader(csvfile)
         fieldnames = reader.fieldnames
 
-    # merge
-    result_name = DATAPATH + "first-names-merged.csv"
+    # define out_file or default to DATAPATH constant and default name
+    out_file = out_file if out_file is not None else DATAPATH + "first-names-merged.csv"
 
-    with open(result_name, "w+", newline="") as outfile:
+    with open(out_file, "w+", newline="") as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)  # type: ignore
         writer.writeheader()
         for file in csv_list:
@@ -61,6 +64,7 @@ def create_first_names_data() -> None:
                 if name not in unique_names:
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
+
     with open(DATAPATH + "first-names.json", "w+", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
