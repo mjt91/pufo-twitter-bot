@@ -151,3 +151,29 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
             last_names_text_path="./tests/data/last-names-test.txt",
             gender="r",
         )
+
+def test_merge_csvs(tmp_path):
+    """It merges the csvs correctly."""
+    # set up temp path folder
+    data_test_path = tmp_path / "data"
+    data_test_path.mkdir()
+    # set up temp vornamen files to merge
+    content1 = "vorname,anzahl,geschlecht\nLorem,300,m"
+    content2 = "vorname,anzahl,geschlecht\nDolor,239,w"
+    vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
+    vornamen_test_file_1.write_text(content1)
+    vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
+    vornamen_test_file_2.write_text(content2)
+
+    test_out_file = data_test_path / "test-data-merged.csv"
+    test_input_path = str(data_test_path) + "/"
+
+    opendatanames.merge_csvs(
+        out_file=test_out_file,
+        input_path=test_input_path
+    )
+
+    with open(test_out_file) as test_file:
+        content_merged = test_file.read()
+
+        assert content_merged == "vorname,anzahl,geschlecht\nLorem,300,m\nDolor,239,w\n"
