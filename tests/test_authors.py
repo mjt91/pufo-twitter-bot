@@ -177,3 +177,35 @@ def test_merge_csvs(tmp_path):
         content_merged = test_file.read()
 
         assert content_merged == "vorname,anzahl,geschlecht\nLorem,300,m\nDolor,239,w\n"
+
+
+def test_create_first_names_data(tmp_path):
+    """It creates the first names dict correctly."""
+    # set up temp path folder
+    data_test_path = tmp_path / "data"
+    data_test_path.mkdir()
+    # set up temp vornamen files to test
+    content_merged_names = "vorname,anzahl,geschlecht\nLorem,300,m\nDolor,239,w\nDolor,100,w\n"
+    content_fnames = "{\n1: [Lorem, m],\n2: [Dolor, w]\n}\n"
+    # write conent to files
+    vornamen_merged_file = data_test_path / "first-names-merged.csv"
+    vornamen_merged_file.write_text(content_merged_names)
+    vornamen_test_file = data_test_path / "first-names-test.json"
+    # vornamen_test_file.write_text(content_fnames)
+    # run the create function
+    opendatanames.create_first_names_data(input_file=vornamen_merged_file, out_file=vornamen_test_file)
+
+    with open(vornamen_test_file, "r") as test_file:
+        content = test_file.read()
+
+        assert content == "{\n" 
+        {
+  "1": [
+    "Lorem",
+    "m"
+  ],
+  "2": [
+    "Dolor",
+    "w"
+  ]
+}
