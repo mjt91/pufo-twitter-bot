@@ -17,7 +17,9 @@ from pufo_twitter_bot.authors.randomnames import AuthorList
 DATAPATH: str = "../../../data/"
 
 
-def merge_csvs(out_file: Union[str, Path] = None, input_path: Union[str, Path] = None) -> None:
+def merge_csvs(
+    out_file: Union[str, Path] = None, input_path: Union[str, Path] = None
+) -> None:
     """Helper function to merge all  offenedaten-köln csv files into one."""
     # define input path or default to DATAPATH constant
     input_path = input_path if input_path is not None else DATAPATH
@@ -42,10 +44,16 @@ def merge_csvs(out_file: Union[str, Path] = None, input_path: Union[str, Path] =
                     writer.writerow(row)
 
 
-def create_first_names_data(out_file: Union[str, Path] = None, input_file: Union[str, Path] = None) -> None:
+def create_first_names_data(
+    out_file: Union[str, Path] = None, input_file: Union[str, Path] = None
+) -> None:
     """Helper function to create the data from all Vornamen files."""
     # load data from file path
-    input_file = input_file if input_file is not None else Path(DATAPATH + "first-names-merged.csv")
+    input_file = (
+        input_file
+        if input_file is not None
+        else Path(DATAPATH + "first-names-merged.csv")
+    )
 
     # create output file dict and set (for unique names)
     names_dict = {}
@@ -65,7 +73,7 @@ def create_first_names_data(out_file: Union[str, Path] = None, input_file: Union
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
 
-    out_file = out_file if out_file is not None else DATAPATH + "first-names.json" 
+    out_file = out_file if out_file is not None else DATAPATH + "first-names.json"
     with open(out_file, "w+", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
@@ -100,11 +108,6 @@ def random_authors(
             a - generate authors from both genders
             w - generate only female names
             m - generate only male names
-
-    Raises:
-        ValueError: the first names dict (first-names.json) gets parsed and
-            filtered on the gender column. value error gets raised when gender
-            is not in [a, w, m].
 
     Returns:
         AuthorList: A nested List of List[Author] (dataclass).
