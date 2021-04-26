@@ -2,6 +2,7 @@
 import random
 from collections.abc import Iterable
 from unittest.mock import Mock
+import json
 
 import click
 import desert
@@ -153,7 +154,7 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
         )
 
 
-def test_merge_csvs(tmp_path):
+def test_merge_csvs(tmp_path):  #TODO: type annotation
     """It merges the csvs correctly."""
     # set up temp path folder
     data_test_path = tmp_path / "data"
@@ -171,13 +172,13 @@ def test_merge_csvs(tmp_path):
 
     opendatanames.merge_csvs(out_file=test_out_file, input_path=test_input_path)
 
-    with open(test_out_file) as test_file:
+    with open(test_out_file) as test_file, open("./tests/data/first-names-merged.csv") as validation_file:
         content_merged = test_file.read()
+        content_validation = validation_file.read()
+        assert content_merged == content_validation
 
-        assert content_merged == "vorname,anzahl,geschlecht\nLorem,300,m\nDolor,239,w\n"
 
-
-def test_create_first_names_data(tmp_path):
+def test_create_first_names_data(tmp_path):     #TODO: type annotation
     """It creates the first names dict correctly."""
     # set up temp path folder
     data_test_path = tmp_path / "data"
@@ -196,8 +197,8 @@ def test_create_first_names_data(tmp_path):
         input_file=vornamen_merged_file, out_file=vornamen_test_file
     )
 
-    with open(vornamen_test_file, "r") as test_file:
-        content = test_file.read()
+    with open(vornamen_test_file, "r") as test_file, open("./tests/data/first-names-test.json") as validation_file:
+        content_created = json.load(test_file)
+        content_validation = json.load(validation_file)
 
-        assert content == "{\n"
-        {"1": ["Lorem", "m"], "2": ["Dolor", "w"]}
+        assert content_created == content_validation
