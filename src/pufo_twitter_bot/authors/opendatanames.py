@@ -42,16 +42,16 @@ def merge_csvs(out_file: Union[str, Path] = None, input_path: Union[str, Path] =
                     writer.writerow(row)
 
 
-def create_first_names_data() -> None:
+def create_first_names_data(out_file: Union[str, Path] = None, input_file: Union[str, Path] = None) -> None:
     """Helper function to create the data from all Vornamen files."""
     # load data from file path
-    fpath = Path(DATAPATH + "first-names-merged.csv")
+    input_file = input_file if input_file is not None else Path(DATAPATH + "first-names-merged.csv")
 
     # create output file dict and set (for unique names)
     names_dict = {}
     unique_names = set()
 
-    with open(fpath, "r", encoding="utf-8") as f:
+    with open(input_file, "r", encoding="utf-8") as f:
         for i, line in enumerate(f):
             # skip header row
             if i == 0:
@@ -65,7 +65,8 @@ def create_first_names_data() -> None:
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
 
-    with open(DATAPATH + "first-names.json", "w+", encoding="utf-8") as file:
+    out_file = out_file if out_file is not None else DATAPATH + "first-names.json" 
+    with open(out_file, "w+", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
 
