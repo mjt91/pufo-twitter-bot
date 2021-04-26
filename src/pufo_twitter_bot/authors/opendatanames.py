@@ -150,20 +150,3 @@ def random_authors(
             first_names_list.append(fnames_dict)
 
     return AuthorListSchema.load({"authors": first_names_list})  # type: ignore
-
-
-if __name__ == "__main__":
-
-    csv_files = [os.path.basename(x) for x in glob.glob(DATAPATH + "*.csv")]
-    json_files = [os.path.basename(x) for x in glob.glob(DATAPATH + "*.json")]
-
-    if "first-names-merged.csv" not in csv_files:
-        print("Created merged csv file with all first names")
-        merge_csvs()
-
-    if "first-names.json" not in json_files:
-        print("Created json file with unique names")
-        create_first_names_data()
-
-    authors = random_authors()
-    print(authors)
