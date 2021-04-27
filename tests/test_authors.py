@@ -1,5 +1,6 @@
 """Test cases for the authors module."""
 import json
+from pathlib import Path
 import random
 from collections.abc import Iterable
 from unittest.mock import Mock
@@ -107,14 +108,15 @@ def test_random_authors_fallback() -> None:
     # set random seed to ensure testability
     random.seed(2)
 
-    author_list = opendatanames.random_authors(
+    #TODO: run setup_files
+    author_list = opendatanames.random_authors(     
         first_names_json_path="./tests/data/first-names-test.json",
         last_names_text_path="./tests/data/last-names-test.txt",
         count=2,
     )
     result_list = [
-        Author(firstname="Lorem", lastname="Ipsum"),
-        Author(firstname="Dolor", lastname="Sit-Amit"),
+        Author(firstname="Peter", lastname="Lorem"),
+        Author(firstname="Lisa", lastname="Ipsum"),
     ]
 
     assert result_list == author_list.authors
@@ -129,7 +131,7 @@ def test_random_authors_fallback_gender_m() -> None:
         gender="m",
     )
 
-    assert author_list.authors[0].firstname == "Lorem"
+    assert author_list.authors[0].firstname == "Peter"
 
 
 def test_random_authors_fallback_gender_w() -> None:
@@ -141,7 +143,7 @@ def test_random_authors_fallback_gender_w() -> None:
         gender="w",
     )
 
-    assert author_list.authors[0].firstname == "Dolor"
+    assert author_list.authors[0].firstname == "Lisa"
 
 
 def test_random_authors_fallback_fails_with_unknown_gender() -> None:
@@ -160,8 +162,8 @@ def test_merge_csvs(tmp_path):  # TODO: type annotation
     data_test_path = tmp_path / "data"
     data_test_path.mkdir()
     # set up temp vornamen files to merge
-    content1 = "vorname,anzahl,geschlecht\nLorem,300,m"
-    content2 = "vorname,anzahl,geschlecht\nDolor,239,w"
+    content1 = "vorname,anzahl,geschlecht\nLisa,239,w"
+    content2 = "vorname,anzahl,geschlecht\nPeter,300,m"
     vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
     vornamen_test_file_1.write_text(content1)
     vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
@@ -187,7 +189,7 @@ def test_create_first_names_data(tmp_path):  # TODO: type annotation
     data_test_path.mkdir()
     # set up temp vornamen files to test
     content_merged_names = (
-        "vorname,anzahl,geschlecht\nLorem,300,m\nDolor,239,w\nDolor,100,w\n"
+        "vorname,anzahl,geschlecht\nPeter,300,m\nLisa,239,w\nLisa,100,w\n"
     )
     # write conent to files
     vornamen_merged_file = data_test_path / "first-names-merged.csv"
@@ -206,3 +208,34 @@ def test_create_first_names_data(tmp_path):  # TODO: type annotation
         content_validation = json.load(validation_file)
 
         assert content_created == content_validation
+
+
+def setup_test_files(test_path: Path) -> None:
+    """Creates a copy of all test files in the separate test folders."""
+    # read and write first-names data
+    with open("./tests/data/first-names-test.json", "r") as file:
+        content = file.read()
+
+        vornamen_test_file = test_path / "first-names-test.json"
+        vornamen_test_file.write_text(content)
+    
+    # read and write merged data
+    with open("./tests/data/first-names-merged.csv", "r") as file:
+        content = file.read()
+
+        vornamen_test_file = test_path / "first-names-merged-test.csv"
+        vornamen_test_file.write_text(content)
+
+    # read and write last-names data
+    with open("./tests/data/last-names-test.txt", "r") as file:
+        content = file.read()
+
+        vornamen_test_file = test_path / "last-names-test.txt"
+        vornamen_test_file.write_text(content)
+    
+    # read and write merged data
+    with open("./tests/data/first-names-merged.csv", "r") as file:
+        content = file.read()
+
+        vornamen_test_file = test_path / "first-names-merged-test.csv"
+        vornamen_test_file.write_text(content)
