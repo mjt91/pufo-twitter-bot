@@ -1,7 +1,6 @@
 """Command-line interface."""
 import click
 
-from .authors import randomnames
 from .authors import opendatanames
 
 
@@ -34,7 +33,7 @@ def main(count: int, gender: str) -> None:
         gender=gender,
         first_names_json_path=FIRST_NAMES,
         last_names_text_path=LAST_NAMES,
-        )
+    )
 
     for i, author in enumerate(author_list.authors):
         click.echo(
