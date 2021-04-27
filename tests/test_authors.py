@@ -86,14 +86,14 @@ def test_authorlistiter_returns_iteratorcls() -> None:
     assert isinstance(iter(author_list), AuthorListIterator)
 
 
-def test_authorlistiter_next_returns_next_author():
+def test_authorlistiter_next_returns_next_author() -> None::
     """The next method returns the next Author from AuthorList."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     author_list_iterator = iter(author_list)
     assert next(author_list_iterator) == Author("Lorem", "Ipsum")
 
 
-def test_authorlistiter_stops():
+def test_authorlistiter_stops() -> None::
     """It stops after the last Author."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     author_list_iterator = iter(author_list)
@@ -156,7 +156,7 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
         )
 
 
-def test_merge_csvs(tmp_path):  # TODO: type annotation
+def test_merge_csvs(tmp_path: Path) -> None:  # TODO: type annotation
     """It merges the csvs correctly."""
     # set up temp path folder
     data_test_path = tmp_path / "data"
@@ -182,7 +182,7 @@ def test_merge_csvs(tmp_path):  # TODO: type annotation
         assert content_merged == content_validation
 
 
-def test_create_first_names_data(tmp_path):  # TODO: type annotation
+def test_create_first_names_data(tmp_path: Path) -> None:  # TODO: type annotation
     """It creates the first names dict correctly."""
     # set up temp path folder
     data_test_path = tmp_path / "data"
