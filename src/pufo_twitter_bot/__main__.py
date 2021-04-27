@@ -1,7 +1,12 @@
 """Command-line interface."""
 import click
 
-from .authors.randomnames import random_authors
+from .authors import randomnames
+from .authors import opendatanames
+
+
+FIRST_NAMES = "./data/first-names.json"
+LAST_NAMES = "./data/last-names.txt"
 
 
 @click.command()
@@ -24,7 +29,12 @@ from .authors.randomnames import random_authors
 @click.version_option()
 def main(count: int, gender: str) -> None:
     """Pufo Twitter Bot."""
-    author_list = random_authors(count=count, gender=gender)
+    author_list = opendatanames.random_authors(
+        count=count,
+        gender=gender,
+        first_names_json_path=FIRST_NAMES,
+        last_names_text_path=LAST_NAMES,
+        )
 
     for i, author in enumerate(author_list.authors):
         click.echo(
