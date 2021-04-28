@@ -35,8 +35,15 @@ Pufo Twitter Bot
 
 Features
 --------
+This is an command-line app to create randomly created book titles to author combinations.
+The interface provides the possibility to tweet the list on twitter.
 
-* TODO
+* Creates a list of random book titels and author combinations
+* Parameters to tune are 
+   * `count` for number of author/titles
+   * `gender` for the gender of the authors
+   
+Book titles are in german for now.
 
 
 Requirements
@@ -58,6 +65,14 @@ You can install *Pufo Twitter Bot* via pip_ from PyPI_:
 
 Usage
 -----
+
+Basic usage:
+
+.. code:: console
+   
+   $ pufo-twitter-bot --count 2 --gender m
+   >> 1. Der Büffel - Florentin Titze
+   >> 2. Platte Tüte - Stefan Will
 
 Please see the `Command-line Reference <Usage_>`_ for details.
 
@@ -86,12 +101,23 @@ please `file an issue`_ along with a detailed description.
 Credits
 -------
 
-Random author names generated from
+Random book titles are taken from `buchtitelgenerator.de`_
+This project would not be possible without the authors of this site for
+letting me use their data. Herewith I express my deepest thanks.
+
+Random author names generated from two origins:
+
+* randomname.de_
+* offenedaten-koeln_
+
+The names data is distributed under the Creative Commons license (see: [cc licenses](https://github.com/santisoler/cc-licenses)
+
 
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
-.. buchtitelgenerator.de: https://www.buchtitelgenerator.de/
-.. _randomname.de: asdf.de
+.. _buchtitelgenerator.de: https://www.buchtitelgenerator.de/
+.. _randomname.de: https://randomname.de/
+.. _offenedaten-koeln: https://offenedaten-koeln.de/
 .. _@cjolowicz: https://github.com/cjolowicz
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _MIT license: https://opensource.org/licenses/MIT
