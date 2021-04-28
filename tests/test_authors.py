@@ -1,8 +1,8 @@
 """Test cases for the authors module."""
 import json
-from pathlib import Path
 import random
 from collections.abc import Iterable
+from pathlib import Path
 from unittest.mock import Mock
 
 import click
@@ -14,7 +14,6 @@ from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
 from pufo_twitter_bot.authors.randomnames import AuthorListIterator
-
 
 
 def test_author_ressource_valid() -> None:
@@ -90,16 +89,24 @@ def test_authorlistiter_stops() -> None:
     with pytest.raises(StopIteration):
         next(author_list_iterator)
 
-class TestRandomNames:
 
-    @pytest.mark.skip(reason="randomname.de not reachable no way of currently testing this")
-    def test_random_authors_returns_ensemble(mock_requests_get: Mock) -> None:
+class TestRandomNames:
+    """Collection of all test cases for the randomname.de API."""
+
+    @pytest.mark.skip(
+        reason="randomname.de not reachable no way of currently testing this"
+    )
+    def test_random_authors_returns_ensemble(self, mock_requests_get: Mock) -> None:
         """It returns a ensemble of authors."""
         authors = randomnames.random_authors()
         assert isinstance(authors, AuthorList)
 
-    @pytest.mark.skip(reason="randomname.de not reachable no way of currently testing this")
-    def test_random_page_handles_validation_errors(mock_requests_get: Mock) -> None:
+    @pytest.mark.skip(
+        reason="randomname.de not reachable no way of currently testing this"
+    )
+    def test_random_page_handles_validation_errors(
+        self, mock_requests_get: Mock
+    ) -> None:
         """It raises `ClickException` when validation fails."""
         mock_requests_get.return_value.__enter__.return_value.json.return_value = None
         with pytest.raises(click.ClickException):
@@ -107,24 +114,24 @@ class TestRandomNames:
 
 
 def setup_test_files(test_path: Path) -> None:
-        """Creates a copy of all test files in the separate test folders."""
-        # read and write first-names data
-        with open("./tests/data/first-names-test.json", "r") as file:
-            content = file.read()
-            firstnames_test_file = test_path / "first-names-test.json"
-            firstnames_test_file.write_text(content)
-        
-        # read and write merged data
-        with open("./tests/data/first-names-merged.csv", "r") as file:
-            content = file.read()
-            firstnames_merged_test_file = test_path / "first-names-merged-test.csv"
-            firstnames_merged_test_file.write_text(content)
+    """Creates a copy of all test files in the separate test folders."""
+    # read and write first-names data
+    with open("./tests/data/first-names-test.json", "r") as file:
+        content = file.read()
+        firstnames_test_file = test_path / "first-names-test.json"
+        firstnames_test_file.write_text(content)
 
-        # read and write last-names data
-        with open("./tests/data/last-names-test.txt", "r") as file:
-            content = file.read()
-            lastnames_test_file = test_path / "last-names-test.txt"
-            lastnames_test_file.write_text(content)
+    # read and write merged data
+    with open("./tests/data/first-names-merged.csv", "r") as file:
+        content = file.read()
+        firstnames_merged_test_file = test_path / "first-names-merged-test.csv"
+        firstnames_merged_test_file.write_text(content)
+
+    # read and write last-names data
+    with open("./tests/data/last-names-test.txt", "r") as file:
+        content = file.read()
+        lastnames_test_file = test_path / "last-names-test.txt"
+        lastnames_test_file.write_text(content)
 
 
 def test_random_authors_fallback(tmp_path) -> None:
@@ -135,9 +142,9 @@ def test_random_authors_fallback(tmp_path) -> None:
     random.seed(2)
 
     first_names_test_json = str(tmp_path / "first-names-test.json")
-    last_names_text_path_test_path = str(tmp_path /"last-names-test.txt")
+    last_names_text_path_test_path = str(tmp_path / "last-names-test.txt")
 
-    author_list = opendatanames.random_authors(     
+    author_list = opendatanames.random_authors(
         first_names_json_path=first_names_test_json,
         last_names_text_path=last_names_text_path_test_path,
         count=2,
@@ -148,6 +155,7 @@ def test_random_authors_fallback(tmp_path) -> None:
     ]
 
     assert result_list == author_list.authors
+
 
 def test_random_authors_fallback_gender_m() -> None:
     """It returns only the male authors."""
@@ -160,6 +168,7 @@ def test_random_authors_fallback_gender_m() -> None:
 
     assert author_list.authors[0].firstname == "Peter"
 
+
 def test_random_authors_fallback_gender_w() -> None:
     """It returns only the female authors."""
     author_list = opendatanames.random_authors(
@@ -171,6 +180,7 @@ def test_random_authors_fallback_gender_w() -> None:
 
     assert author_list.authors[0].firstname == "Lisa"
 
+
 def test_random_authors_fallback_fails_with_unknown_gender() -> None:
     """It fails to get the authors."""
     with pytest.raises(ValueError):
@@ -179,6 +189,7 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
             last_names_text_path="./tests/data/last-names-test.txt",
             gender="r",
         )
+
 
 def test_merge_csvs(tmp_path: Path) -> None:
     """It merges the csvs correctly."""
@@ -204,6 +215,7 @@ def test_merge_csvs(tmp_path: Path) -> None:
         content_merged = test_file.read()
         content_validation = validation_file.read()
         assert content_merged == content_validation
+
 
 def test_create_first_names_data(tmp_path: Path) -> None:  # TODO: type annotation
     """It creates the first names dict correctly."""

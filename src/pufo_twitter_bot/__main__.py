@@ -42,4 +42,5 @@ def main(count: int, gender: str) -> None:
 
 
 if __name__ == "__main__":
+    print(FIRST_NAMES)
     main(prog_name="pufo-twitter-bot")  # pragma: no cover
