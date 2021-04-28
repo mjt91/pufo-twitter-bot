@@ -134,7 +134,7 @@ def setup_test_files(test_path: Path) -> None:
         lastnames_test_file.write_text(content)
 
 
-def test_random_authors_fallback(tmp_path) -> None:
+def test_random_authors_fallback(tmp_path:  Path) -> None:
     """The test authors are generated from the fallback file."""
     # setup test files
     setup_test_files(tmp_path)
