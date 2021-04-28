@@ -112,6 +112,7 @@ Random author names generated from two origins:
 
 The names data is distributed under the Creative Commons license (see: [cc licenses](https://github.com/santisoler/cc-licenses)
 
+
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
 .. _buchtitelgenerator.de: https://www.buchtitelgenerator.de/

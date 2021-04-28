@@ -14,7 +14,7 @@ class Author:
 
     Attributes:
         firstname: Firstname of the author.
-        lastname: Surname of the author.
+        lastname: Lastname of the author.
     """
 
     firstname: str
@@ -38,6 +38,25 @@ class AuthorList:
             marshmallow.fields.Nested(AuthorSchema)
         )
     )  # type: ignore
+
+    # index to make AuthorList iterable
+    _index = 0
+
+    def __iter__(self):  # type: ignore
+        """Iterator for AuthorList."""
+        return self
+
+    def __next__(self):  # type: ignore
+        """Iterator for AuthorList."""
+        self._authors: List[Author] = self.authors
+
+        if self._index < len(self._authors):
+            result: Author = self._authors[self._index]
+
+            self._index += 1
+            return result
+
+        raise StopIteration
 
 
 AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUDE})
