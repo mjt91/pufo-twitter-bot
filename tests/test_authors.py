@@ -1,6 +1,7 @@
 """Test cases for the authors module."""
 import json
 import random
+from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -44,6 +45,11 @@ def test_authors_ensemble_ressource_valid() -> None:
             Author(firstname="Bob", lastname="Builder"),
         ]
     )
+
+
+def test_authorlist_iter() -> None:
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
+    assert isinstance(iter(author_list), Iterator)
 
 
 def test_authorlist_next() -> None:
