@@ -1,5 +1,6 @@
 """Client for the randomname.de REST API, version 1."""
 from dataclasses import dataclass
+from typing import Iterator
 from typing import List
 
 import click
@@ -39,28 +40,16 @@ class AuthorList:
         )
     )  # type: ignore
 
-    def __iter__(self) -> AuthorListIterator:
+    # index to make AuthorList iterable
+    _index = 0
+
+    def __iter__(self) -> Iterator:
         """Returns the AuthorList iterator object."""
         return AuthorListIterator(self)
 
-
-class AuthorListIterator:
-    """Iterator class for AuthorList."""
-
-    def __init__(self, authorlist: AuthorList) -> None:
-        """Constructor for the AuthorList iterator class.
-
-        Create a reference for the Authors in the AuthorList object.
-        Initialize the index to zero for iterator loop.
-
-        Args:
-            authorlist (AujthorList): AuthorList object reference
-        """
-        self._authors: List[Author] = authorlist.authors
-        self._index: int = 0
-
     def __next__(self) -> Author:
-        """Returns the next author from the AuthorList list."""
+        self._authors: List[Author] = self.authors
+
         if self._index < len(self._authors):
             result: Author = self._authors[self._index]
 

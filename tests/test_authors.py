@@ -13,7 +13,6 @@ from pufo_twitter_bot.authors import opendatanames
 from pufo_twitter_bot.authors import randomnames
 from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
-from pufo_twitter_bot.authors.randomnames import AuthorListIterator
 
 
 def test_author_ressource_valid() -> None:
@@ -48,6 +47,11 @@ def test_authors_ensemble_ressource_valid() -> None:
     )
 
 
+def test_authorlist_next() -> None:
+    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
+    assert next(author_list) == Author("Lorem", "Ipsum")
+
+
 def test_authorlistiterator_init() -> None:
     """The AuthorListIterator has an constructor."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
@@ -57,25 +61,15 @@ def test_authorlistiterator_init() -> None:
 def test_authorlistiterator_has_next() -> None:
     """The AuthorListIterator has __next__ method."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    author_list_iterator = AuthorListIterator(author_list)
-    assert hasattr(author_list_iterator, "__next__")
-
-
-def test_authorlistiter_next_returns_next_author() -> None:
-    """The next method returns the next Author from AuthorList."""
-    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    author_list_iterator = iter(author_list)    #type: ignore
-    assert next(author_list_iterator) == Author("Lorem", "Ipsum")
+    assert hasattr(author_list, "__next__")
 
 
 def test_authorlistiter_stops() -> None:
     """It stops after the last Author."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    author_list_iterator = iter(author_list)    #type: ignore
-    _ = next(author_list_iterator) == Author("Lorem", "Ipsum")
-
+    _ = next(author_list)
     with pytest.raises(StopIteration):
-        next(author_list_iterator)
+        next(author_list)
 
 
 class TestRandomNames:
@@ -122,7 +116,7 @@ def setup_test_files(test_path: Path) -> None:
         lastnames_test_file.write_text(content)
 
 
-def test_random_authors_fallback(tmp_path:  Path) -> None:
+def test_random_authors_fallback(tmp_path: Path) -> None:
     """The test authors are generated from the fallback file."""
     # setup test files
     setup_test_files(tmp_path)
