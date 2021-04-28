@@ -47,7 +47,7 @@ class AuthorList:
 class AuthorListIterator:
     """Iterator class for AuthorList."""
 
-    def __init__(self, authorlist) -> None:
+    def __init__(self, authorlist: AuthorList) -> None:
         """Constructor for the AuthorList iterator class.
 
         Create a reference for the Authors in the AuthorList object.
@@ -56,7 +56,7 @@ class AuthorListIterator:
         Args:
             authorlist (AujthorList): AuthorList object reference
         """
-        self._authors: List[str] = authorlist.authors
+        self._authors: List[Author] = authorlist.authors
         self._index: int = 0
 
     def __next__(self) -> Author:
