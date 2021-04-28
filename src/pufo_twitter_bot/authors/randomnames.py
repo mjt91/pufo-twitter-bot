@@ -1,6 +1,5 @@
 """Client for the randomname.de REST API, version 1."""
 from dataclasses import dataclass
-from typing import Iterator
 from typing import List
 
 import click
@@ -43,11 +42,11 @@ class AuthorList:
     # index to make AuthorList iterable
     _index = 0
 
-    def __iter__(self):     #type: ignore
+    def __iter__(self):  # type: ignore
         """Iterator for AuthorList."""
         return self
 
-    def __next__(self):     #type: ignore
+    def __next__(self):  # type: ignore
         """Iterator for AuthorList."""
         self._authors: List[Author] = self.authors
 
