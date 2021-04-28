@@ -17,13 +17,13 @@ DATAPATH: str = "../../../data/"
 
 
 def merge_csvs(
-    out_file: Union[str, Path] = None, input_path: Union[str, Path] = None
+    out_file: Union[str, Path, None] = None, input_path: Union[str, Path, None] = None
 ) -> None:
     """Helper function to merge all  offenedaten-köln csv files into one."""
     # define input path or default to DATAPATH constant
     input_path = input_path if input_path is not None else DATAPATH
 
-    csv_list = glob.glob(input_path + "*.csv")
+    csv_list = glob.glob(str(input_path) + "*.csv")
 
     # get fieldnames
     with open(csv_list[0], newline="") as csvfile:
@@ -44,7 +44,7 @@ def merge_csvs(
 
 
 def create_first_names_data(
-    out_file: Union[str, Path] = None, input_file: Union[str, Path] = None
+    out_file: Union[str, Path, None] = None, input_file: Union[str, Path, None] = None
 ) -> None:
     """Helper function to create the data from all Vornamen files."""
     # load data from file path
@@ -86,8 +86,8 @@ AuthorListSchema = desert.schema(AuthorList, meta={"unknown": marshmallow.EXCLUD
 def random_authors(
     count: int = 10,
     gender: str = "a",
-    first_names_json_path: Union[str, Path] = None,
-    last_names_text_path: Union[str, Path] = None,
+    first_names_json_path: Union[str, Path, None] = None,
+    last_names_text_path: Union[str, Path, None] = None,
 ) -> AuthorList:
     """Return a author set of size n.
 
