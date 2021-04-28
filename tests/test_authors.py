@@ -48,12 +48,6 @@ def test_authors_ensemble_ressource_valid() -> None:
     )
 
 
-def test_authorlist_iterable() -> None:
-    """The AuthorList is of type Iterable."""
-    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    assert isinstance(author_list, Iterable)
-
-
 def test_authorlistiterator_init() -> None:
     """The AuthorListIterator has an constructor."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
@@ -67,23 +61,17 @@ def test_authorlistiterator_has_next() -> None:
     assert hasattr(author_list_iterator, "__next__")
 
 
-def test_authorlistiter_returns_iteratorcls() -> None:
-    """Iter of AuthorList returns the iterator."""
-    author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    assert isinstance(iter(author_list), AuthorListIterator)
-
-
 def test_authorlistiter_next_returns_next_author() -> None:
     """The next method returns the next Author from AuthorList."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    author_list_iterator = iter(author_list)
+    author_list_iterator = iter(author_list)    #type: ignore
     assert next(author_list_iterator) == Author("Lorem", "Ipsum")
 
 
 def test_authorlistiter_stops() -> None:
     """It stops after the last Author."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
-    author_list_iterator = iter(author_list)
+    author_list_iterator = iter(author_list)    #type: ignore
     _ = next(author_list_iterator) == Author("Lorem", "Ipsum")
 
     with pytest.raises(StopIteration):
