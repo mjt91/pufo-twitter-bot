@@ -1,7 +1,6 @@
 """Test cases for the authors module."""
 import json
 import random
-from collections.abc import Iterable
 from pathlib import Path
 from unittest.mock import Mock
 
@@ -48,6 +47,7 @@ def test_authors_ensemble_ressource_valid() -> None:
 
 
 def test_authorlist_next() -> None:
+    """It tests if AuthorList object is iterable."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     assert next(author_list) == Author("Lorem", "Ipsum")
 

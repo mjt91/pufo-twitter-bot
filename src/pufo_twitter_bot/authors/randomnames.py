@@ -43,11 +43,12 @@ class AuthorList:
     # index to make AuthorList iterable
     _index = 0
 
-    def __iter__(self) -> Iterator:
-        """Returns the AuthorList iterator object."""
-        return AuthorListIterator(self)
+    def __iter__(self):     #type: ignore
+        """Iterator for AuthorList."""
+        return self
 
-    def __next__(self) -> Author:
+    def __next__(self):     #type: ignore
+        """Iterator for AuthorList."""
         self._authors: List[Author] = self.authors
 
         if self._index < len(self._authors):
