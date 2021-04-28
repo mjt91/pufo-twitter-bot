@@ -35,6 +35,8 @@ Pufo Twitter Bot
 
 Features
 --------
+This is an command-line app to create randomly created book titles to author combinations.
+The interface provides the possibility to tweet the list on twitter.
 
 * Creates a list of random book titels and author combinations
 * Parameters to tune are 
@@ -63,6 +65,14 @@ You can install *Pufo Twitter Bot* via pip_ from PyPI_:
 
 Usage
 -----
+
+Basic usage:
+
+.. code:: console
+   
+   $ pufo-twitter-bot --count 2 --gender m
+   >> 1. Der Büffel - Florentin Titze
+   >> 2. Platte Tüte - Stefan Will
 
 Please see the `Command-line Reference <Usage_>`_ for details.
 
