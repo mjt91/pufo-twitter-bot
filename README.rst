@@ -33,7 +33,7 @@ Pufo Twitter Bot
    :alt: Black
 
 
-Features
+Features 🚀
 --------
 This is an command-line app to create randomly created book titles to author combinations.
 The interface provides the possibility to tweet the list on twitter.
@@ -110,11 +110,18 @@ Random author names generated from two origins:
 * randomname.de_
 * offenedaten-koeln_
 
-The names data is distributed under the Creative Commons license (see: [cc licenses](https://github.com/santisoler/cc-licenses)
+The names data is distributed under the Creative Commons license (see: `cc licenses`_)
+
+
+Support
+-------
+
+Get me a `coffee`_ ☕  or `beer`_ 🍺
 
 
 This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter`_ template.
 
+.. _cc licenses: https://github.com/santisoler/cc-licenses
 .. _buchtitelgenerator.de: https://www.buchtitelgenerator.de/
 .. _randomname.de: https://randomname.de/
 .. _offenedaten-koeln: https://offenedaten-koeln.de/
@@ -128,3 +135,5 @@ This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter
 .. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Usage: https://pufo-twitter-bot.readthedocs.io/en/latest/usage.html
+.. _beer: https://www.buymeacoffee.com/mjt91
+.. _coffee: https://www.buymeacoffee.com/mjt91
