@@ -31,8 +31,3 @@ def buchtitelgenerator() -> List[str]:
     except requests.RequestException as error:
         message = str(error)
         raise click.ClickException(message)
-
-
-if __name__ == "__main__":
-    books = buchtitelgenerator()
-    print(books)
