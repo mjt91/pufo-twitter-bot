@@ -34,20 +34,18 @@ def main(count: int, gender: str) -> None:
         first_names_json_path=FIRST_NAMES,
         last_names_text_path=LAST_NAMES,
     )
-      
+
     book_list = randombuch.buchtitelgenerator()
 
     if count > 5:
         run_num = round(count / 5)
-        for i in range(0, run_num):
+        for _ in range(0, run_num):
             new_books = randombuch.buchtitelgenerator()
             book_list += new_books
 
     for i, author in enumerate(author_list.authors):
         book = book_list[i]
-        click.echo(
-            f"{i+1}. Platz '{book}' von {author.firstname} {author.lastname}"
-        )
+        click.echo(f"{i+1}. Platz '{book}' von {author.firstname} {author.lastname}")
 
 
 if __name__ == "__main__":
