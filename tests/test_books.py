@@ -5,11 +5,13 @@ from pufo_twitter_bot.books import randombuch
 
 
 def test_buchtitelgenerator_returns_list() -> None:
+    """It returns a list."""
     books = randombuch.buchtitelgenerator()
     assert isinstance(books, list)
 
 
 def test_buchtitelgenerator_returns_list_of_strs() -> None:
+    """Each book is of type str."""
     books = randombuch.buchtitelgenerator()
     for book in books:
         assert isinstance(book, str)
