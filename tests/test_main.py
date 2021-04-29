@@ -1,6 +1,7 @@
 """Test cases for the __main__ module."""
 from unittest.mock import Mock
 from unittest.mock import patch
+import random
 
 import pytest
 import requests
@@ -25,6 +26,7 @@ def test_main_succeeds(runner: CliRunner) -> None:
 @patch("pufo_twitter_bot.__main__.LAST_NAMES", "tests/data/last-names-test.txt")
 def test_main_prints_fallback_authors(runner: CliRunner) -> None:
     """It prints the names of the fallback authors."""
+    random.seed(2)  # use seed to guarantee testability
     result = runner.invoke(__main__.main, ["--count", "2"])
     assert "Peter Lorem" in result.output and "Lisa Ipsum" in result.output
 
