@@ -48,7 +48,7 @@ def test_authors_ensemble_ressource_valid() -> None:
 
 
 def test_authorlist_iter() -> None:
-    """AuthorList is an Iterator."""
+    """The AuthorList object is an Iterator."""
     author_list = AuthorList(authors=[Author("Lorem", "Ipsum")])
     assert isinstance(iter(author_list), Iterator)
 
