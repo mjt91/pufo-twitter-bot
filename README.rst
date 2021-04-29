@@ -39,10 +39,10 @@ This is an command-line app to create randomly created book titles to author com
 The interface provides the possibility to tweet the list on twitter.
 
 * Creates a list of random book titels and author combinations
-* Parameters to tune are 
+* Parameters to tune are
    * `count` for number of author/titles
    * `gender` for the gender of the authors
-   
+
 Book titles are in german for now.
 
 
@@ -69,7 +69,7 @@ Usage
 Basic usage:
 
 .. code:: console
-   
+
    $ pufo-twitter-bot --count 2 --gender m
    >> 1. Der Büffel - Florentin Titze
    >> 2. Platte Tüte - Stefan Will
