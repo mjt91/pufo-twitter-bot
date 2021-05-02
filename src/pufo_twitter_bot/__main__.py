@@ -32,7 +32,7 @@ LAST_NAMES = "./data/last-names.txt"
     default="randomname",
     type=click.Choice(["randomname", "offenedaten"], case_sensitive=False),
     metavar="SOURCE",
-    help="Set the source of the authors names."
+    help="Set the source of the authors names.",
 )
 @click.version_option()
 def main(count: int, gender: str, source: str) -> None:
@@ -42,7 +42,7 @@ def main(count: int, gender: str, source: str) -> None:
             count=count,
             gender=gender,
         )
-    elif source == "offenedaten":
+    if source == "offenedaten":
         author_list = opendatanames.random_authors(
             count=count,
             gender=gender,
