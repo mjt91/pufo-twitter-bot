@@ -83,17 +83,11 @@ def test_authorlistiter_stops() -> None:
 class TestRandomNames:
     """Collection of all test cases for the randomname.de API."""
 
-    @pytest.mark.skip(
-        reason="randomname.de not reachable no way of currently testing this"
-    )
     def test_random_authors_returns_ensemble(self, mock_requests_get: Mock) -> None:
         """It returns a ensemble of authors."""
         authors = randomnames.random_authors()
         assert isinstance(authors, AuthorList)
 
-    @pytest.mark.skip(
-        reason="randomname.de not reachable no way of currently testing this"
-    )
     def test_random_page_handles_validation_errors(
         self, mock_requests_get: Mock
     ) -> None:
