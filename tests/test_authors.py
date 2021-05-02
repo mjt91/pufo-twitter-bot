@@ -178,7 +178,7 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
 @pytest.mark.skipif(
     sys.platform.startswith("linux"), reason="parsing works different on linux"
 )
-def test_merge_csvs(tmp_path: Path) -> None:
+def test_merge_csvs_windows(tmp_path: Path) -> None:
     """It merges the csvs correctly."""
     # set up temp path folder
     data_test_path = tmp_path / "data"
@@ -186,6 +186,35 @@ def test_merge_csvs(tmp_path: Path) -> None:
     # set up temp vornamen files to merge
     content1 = "vorname,anzahl,geschlecht\nLisa,239,w"
     content2 = "vorname,anzahl,geschlecht\nPeter,300,m"
+    vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
+    vornamen_test_file_1.write_text(content1)
+    vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
+    vornamen_test_file_2.write_text(content2)
+
+    test_out_file = data_test_path / "test-data-merged.csv"
+    test_input_path = str(data_test_path) + "/"
+
+    opendatanames.merge_csvs(out_file=test_out_file, input_path=test_input_path)
+
+    with open(test_out_file) as test_file, open(
+        "./tests/data/first-names-merged.csv"
+    ) as validation_file:
+        content_merged = test_file.read()
+        content_validation = validation_file.read()
+        assert content_merged == content_validation
+
+
+@pytest.mark.skipif(
+    sys.platform.startswith("win"), reason="parsing works different on windows"
+)
+def test_merge_csvs_linux(tmp_path: Path) -> None:
+    """It merges the csvs correctly."""
+    # set up temp path folder
+    data_test_path = tmp_path / "data"
+    data_test_path.mkdir()
+    # set up temp vornamen files to merge
+    content1 = "vorname,anzahl,geschlecht\nPeter,300,m"
+    content2 = "vorname,anzahl,geschlecht\nLisa,239,w"
     vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
     vornamen_test_file_1.write_text(content1)
     vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
