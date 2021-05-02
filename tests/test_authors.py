@@ -1,7 +1,7 @@
 """Test cases for the authors module."""
-import sys
 import json
 import random
+import sys
 from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import Mock
@@ -181,7 +181,9 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
         )
 
 
-@pytest.mark.skipif(sys.platform.startswith("linux"), reason="parsing works different on linux")
+@pytest.mark.skipif(
+    sys.platform.startswith("linux"), reason="parsing works different on linux"
+)
 def test_merge_csvs(tmp_path: Path) -> None:
     """It merges the csvs correctly."""
     # set up temp path folder
