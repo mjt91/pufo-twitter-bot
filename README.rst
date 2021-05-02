@@ -34,7 +34,7 @@ Pufo Twitter Bot
 
 
 Features 🚀
---------
+-----------
 This is an command-line app to create randomly created book titles to author combinations.
 The interface provides the possibility to tweet the list on twitter.
 
