@@ -2,6 +2,7 @@
 import click
 
 from .authors import opendatanames
+from .authors import randomnames
 from .books import randombuch
 
 FIRST_NAMES = "./data/first-names.json"
@@ -25,15 +26,29 @@ LAST_NAMES = "./data/last-names.txt"
     metavar="GENDER",
     show_default=True,
 )
+@click.option(
+    "-s",
+    "--source",
+    default="randomname",
+    type=click.Choice(["randomname", "offenedaten"], case_sensitive=False),
+    metavar="SOURCE",
+    help="Set the source of the authors names."
+)
 @click.version_option()
-def main(count: int, gender: str) -> None:
+def main(count: int, gender: str, source: str) -> None:
     """Pufo Twitter Bot."""
-    author_list = opendatanames.random_authors(
-        count=count,
-        gender=gender,
-        first_names_json_path=FIRST_NAMES,
-        last_names_text_path=LAST_NAMES,
-    )
+    if source == "randomname":
+        author_list = randomnames.random_authors(
+            count=count,
+            gender=gender,
+        )
+    elif source == "offenedaten":
+        author_list = opendatanames.random_authors(
+            count=count,
+            gender=gender,
+            first_names_json_path=FIRST_NAMES,
+            last_names_text_path=LAST_NAMES,
+        )
 
     book_list = randombuch.buchtitelgenerator()
 
