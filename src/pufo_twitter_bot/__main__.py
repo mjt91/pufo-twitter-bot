@@ -34,6 +34,12 @@ LAST_NAMES = "./data/last-names.txt"
     metavar="SOURCE",
     help="Set the source of the authors names.",
 )
+@click.option(
+    "--tweet/--no-tweet",
+    default=False,
+    help="List should be tweeted.",
+    metavar="TWEET",
+)
 @click.version_option()
 def main(count: int, gender: str, source: str) -> None:
     """Pufo Twitter Bot."""
