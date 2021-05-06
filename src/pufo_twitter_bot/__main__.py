@@ -74,9 +74,16 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
                 tweet = "PUFO Bestseller Liste:\n" + entry + "\n"
             else:
                 tweet += entry + "\n"
-        
-    print(tweet)
-    print(twitter.validate_tweet(tweet))
+    
+    # validate tweet
+    twitter.validate_tweet(tweet)
+
+    # create twitter api
+    api = twitter.create_api()
+
+    # tweet status update
+    api.update_status(tweet)
+    
 
 if __name__ == "__main__":
     main(prog_name="pufo-twitter-bot")  # pragma: no cover
