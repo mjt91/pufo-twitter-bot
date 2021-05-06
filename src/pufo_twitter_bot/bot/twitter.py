@@ -36,9 +36,23 @@ def create_api() -> API:
     return api
 
 
-def validate_tweet() -> None:
-    """Validates the tweet."""
-    pass
+def validate_tweet(tweet: str) -> bool:
+    """It validates the tweet.
+
+    Args:
+        tweet (str): The text to tweet.
+
+    Raises:
+        ValueError: Raises if tweet length is more than 280 unicode characters.
+
+    Returns:
+        bool: True if validation holds.
+    """
+    str_len = len(str)
+    if str_len > 280:
+        raise ValueError("tweet is more than 280 unicode characters")
+    else:
+        return True
 
 
 if __name__ == "__main__":
