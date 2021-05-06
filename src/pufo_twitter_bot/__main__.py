@@ -4,6 +4,7 @@ import click
 from .authors import opendatanames
 from .authors import randomnames
 from .books import randombuch
+from .bot import twitter
 
 FIRST_NAMES = "./data/first-names.json"
 LAST_NAMES = "./data/last-names.txt"
@@ -34,8 +35,14 @@ LAST_NAMES = "./data/last-names.txt"
     metavar="SOURCE",
     help="Set the source of the authors names.",
 )
+@click.option(
+    "--tweet/--no-tweet",
+    default=False,
+    help="List should be tweeted.",
+    metavar="TWEET",
+)
 @click.version_option()
-def main(count: int, gender: str, source: str) -> None:
+def main(count: int, gender: str, source: str, tweet: bool) -> None:
     """Pufo Twitter Bot."""
     if source == "randomname":
         author_list = randomnames.random_authors(
@@ -60,8 +67,16 @@ def main(count: int, gender: str, source: str) -> None:
 
     for i, author in enumerate(author_list.authors):
         book = book_list[i]
-        click.echo(f"{i+1}. Platz '{book}' von {author.firstname} {author.lastname}")
-
+        entry = f"{i+1}. '{book}' von {author.firstname} {author.lastname}"
+        click.echo(entry)
+        if tweet:
+            if i == 0:
+                tweet = "PUFO Bestseller Liste:\n" + entry + "\n"
+            else:
+                tweet += entry + "\n"
+        
+    print(tweet)
+    print(twitter.validate_tweet(tweet))
 
 if __name__ == "__main__":
     main(prog_name="pufo-twitter-bot")  # pragma: no cover
