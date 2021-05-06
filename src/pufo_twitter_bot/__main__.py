@@ -4,6 +4,7 @@ import click
 from .authors import opendatanames
 from .authors import randomnames
 from .books import randombuch
+from .bot import twitter
 
 FIRST_NAMES = "./data/first-names.json"
 LAST_NAMES = "./data/last-names.txt"
@@ -66,7 +67,7 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
 
     for i, author in enumerate(author_list.authors):
         book = book_list[i]
-        entry = f"{i+1}. Platz '{book}' von {author.firstname} {author.lastname}"
+        entry = f"{i+1}. '{book}' von {author.firstname} {author.lastname}"
         click.echo(entry)
         if tweet:
             if i == 0:
@@ -75,6 +76,7 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
                 tweet += entry + "\n"
         
     print(tweet)
+    print(twitter.validate_tweet(tweet))
 
 if __name__ == "__main__":
     main(prog_name="pufo-twitter-bot")  # pragma: no cover
