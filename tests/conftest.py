@@ -2,6 +2,7 @@
 from unittest.mock import Mock
 
 import pytest
+import tweepy
 from _pytest.config import Config
 from pytest_mock import MockFixture
 
@@ -32,3 +33,9 @@ def mock_requests_get(mocker: MockFixture) -> Mock:
 def mock_randomnames_random_authors(mocker: MockFixture) -> Mock:
     """Fixture for mocking authors.randomname.random_authors."""
     return mocker.patch("pufo_twitter_bot.authors.randomnames.random_authors")
+
+
+@pytest.fixture
+def mock_tweepy_api(mocker: MockFixture) -> Mock:
+    """Fixture for mocking tweepy.api object."""
+    return mocker.patch.object(tweepy, "API", autospec=True)
