@@ -2,7 +2,7 @@
 from unittest.mock import Mock
 
 import pytest
-import tweepy       #type: ignore
+import tweepy  # type: ignore
 from _pytest.config import Config
 from pytest_mock import MockFixture
 
