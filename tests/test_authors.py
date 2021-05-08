@@ -100,22 +100,22 @@ class TestRandomNames:
 def setup_test_files(test_path: Path) -> None:
     """Creates a copy of all test files in the separate test folders."""
     # read and write first-names data
-    with open("./tests/data/first-names-test.json", "r") as file:
+    with open("./tests/data/first-names-test.json", "r", encoding="utf-8") as file:
         content = file.read()
         firstnames_test_file = test_path / "first-names-test.json"
-        firstnames_test_file.write_text(content)
+        firstnames_test_file.write_text(content, encoding="utf-8")
 
     # read and write merged data
-    with open("./tests/data/first-names-merged.csv", "r") as file:
+    with open("./tests/data/first-names-merged.csv", "r", encoding="utf-8") as file:
         content = file.read()
         firstnames_merged_test_file = test_path / "first-names-merged-test.csv"
-        firstnames_merged_test_file.write_text(content)
+        firstnames_merged_test_file.write_text(content, encoding="utf-8")
 
     # read and write last-names data
-    with open("./tests/data/last-names-test.txt", "r") as file:
+    with open("./tests/data/last-names-test.txt", "r", encoding="utf-8") as file:
         content = file.read()
         lastnames_test_file = test_path / "last-names-test.txt"
-        lastnames_test_file.write_text(content)
+        lastnames_test_file.write_text(content, encoding="utf-8")
 
 
 def test_random_authors_fallback(tmp_path: Path) -> None:
