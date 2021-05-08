@@ -196,7 +196,7 @@ def test_merge_csvs_windows(tmp_path: Path) -> None:
 
     opendatanames.merge_csvs(out_file=test_out_file, input_path=test_input_path)
 
-    with open(test_out_file) as test_file, open(
+    with open(test_out_file, encoding="utf-8") as test_file, open(
         "./tests/data/first-names-merged.csv", encoding="utf-8"
     ) as validation_file:
         content_merged = test_file.read()
