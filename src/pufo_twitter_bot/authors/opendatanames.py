@@ -26,18 +26,18 @@ def merge_csvs(
     csv_list = glob.glob(str(input_path) + "*.csv")
 
     # get fieldnames
-    with open(csv_list[0], newline="") as csvfile:
+    with open(csv_list[0], newline="", encoding="utf-8") as csvfile:
         reader = csv.DictReader(csvfile)
         fieldnames = reader.fieldnames
 
     # define out_file or default to DATAPATH constant and default name
     out_file = out_file if out_file is not None else DATAPATH + "first-names-merged.csv"
 
-    with open(out_file, "w+", newline="") as outfile:
+    with open(out_file, "w+", newline="", encoding="utf-8") as outfile:
         writer = csv.DictWriter(outfile, fieldnames=fieldnames)  # type: ignore
         writer.writeheader()
         for file in csv_list:
-            with open(file, newline="") as theread:
+            with open(file, newline="", encoding="utf-8") as theread:
                 reader = csv.DictReader(theread)
                 for row in reader:
                     writer.writerow(row)
@@ -122,7 +122,7 @@ def random_authors(
         else Path("../../../data/last-names.txt")
     )
 
-    with open(first_names_json_path, "r") as ffile, open(
+    with open(first_names_json_path, "r", encoding="utf-8") as ffile, open(
         last_names_text_path, "r"
     ) as lfile:
         first_names = json.load(ffile)
