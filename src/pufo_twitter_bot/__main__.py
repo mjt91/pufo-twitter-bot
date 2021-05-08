@@ -71,18 +71,19 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
         click.echo(entry)
         if tweet:
             if i == 0:
-                tweet = "PUFO Bestseller Liste:\n" + entry + "\n"
+                tweet_txt: str = "PUFO Bestseller Liste:\n" + entry + "\n"
             else:
-                tweet += entry + "\n"
+                tweet_txt += entry + "\n"
 
-    # validate tweet
-    twitter.validate_tweet(tweet)
+    if tweet:
+        # validate tweet
+        twitter.validate_tweet(tweet_txt)
 
-    # create twitter api
-    api = twitter.create_api()
+        # create twitter api
+        api = twitter.create_api()
 
-    # tweet status update
-    api.update_status(tweet)
+        # tweet status update
+        api.update_status(tweet_txt)
 
 
 if __name__ == "__main__":
