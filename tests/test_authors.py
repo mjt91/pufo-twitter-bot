@@ -187,9 +187,9 @@ def test_merge_csvs_windows(tmp_path: Path) -> None:
     content1 = "vorname,anzahl,geschlecht\nLisa,239,w"
     content2 = "vorname,anzahl,geschlecht\nPeter,300,m"
     vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
-    vornamen_test_file_1.write_text(content1)
+    vornamen_test_file_1.write_text(content1, encoding="utf-8")
     vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
-    vornamen_test_file_2.write_text(content2)
+    vornamen_test_file_2.write_text(content2, encoding="utf-8")
 
     test_out_file = data_test_path / "test-data-merged.csv"
     test_input_path = str(data_test_path) + "/"
