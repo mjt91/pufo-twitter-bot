@@ -13,7 +13,7 @@ from pufo_twitter_bot.authors.randomnames import Author
 from pufo_twitter_bot.authors.randomnames import AuthorList
 
 
-DATAPATH: str = "../../../data/"
+DATAPATH: str = "../../../data"
 
 
 def merge_csvs(
@@ -23,18 +23,19 @@ def merge_csvs(
     # define input path or default to DATAPATH constant
     input_path = input_path if input_path is not None else DATAPATH
 
-    csv_list = glob.glob(str(input_path) + "*.csv")
+    # get all csv files in input path
+    csv_list = glob.glob(str(input_path) + "/*.csv")
 
-    # get fieldnames
-    with open(csv_list[0], newline="", encoding="utf-8") as csvfile:
-        reader = csv.DictReader(csvfile)
-        fieldnames = reader.fieldnames
+    # set fieldnames
+    fieldnames = ["vorname", "anzahl", "geschlecht"]
 
     # define out_file or default to DATAPATH constant and default name
-    out_file = out_file if out_file is not None else DATAPATH + "first-names-merged.csv"
+    out_file = (
+        out_file if out_file is not None else DATAPATH + "/first-names-merged.csv"
+    )
 
     with open(out_file, "w+", newline="", encoding="utf-8") as outfile:
-        writer = csv.DictWriter(outfile, fieldnames=fieldnames)  # type: ignore
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)     # type: ignore
         writer.writeheader()
         for file in csv_list:
             with open(file, newline="", encoding="utf-8") as theread:
@@ -51,7 +52,7 @@ def create_first_names_data(
     input_file = (
         input_file
         if input_file is not None
-        else Path(DATAPATH + "first-names-merged.csv")
+        else Path(DATAPATH + "/first-names-merged.csv")
     )
 
     # create output file dict and set (for unique names)
@@ -72,7 +73,7 @@ def create_first_names_data(
                     names_dict[i] = [name, gender]
                     unique_names.add(name)
 
-    out_file = out_file if out_file is not None else DATAPATH + "first-names.json"
+    out_file = out_file if out_file is not None else DATAPATH + "/first-names.json"
     with open(out_file, "w+", encoding="utf-8") as file:
         json.dump(names_dict, file, ensure_ascii=False, indent=2)
 
