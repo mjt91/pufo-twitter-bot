@@ -35,7 +35,7 @@ def merge_csvs(
     )
 
     with open(out_file, "w+", newline="", encoding="utf-8") as outfile:
-        writer = csv.DictWriter(outfile, fieldnames=fieldnames)     # type: ignore
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
         writer.writeheader()
         for file in csv_list:
             with open(file, newline="", encoding="utf-8") as theread:
