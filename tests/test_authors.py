@@ -99,11 +99,11 @@ class TestRandomNames:
 def setup_test_files(test_path: Path, merged_file: bool = True) -> None:
     """Creates a copy of all test files in the separate test folders."""
     # write first-names input data (two files)
-    content1 = "vorname,anzahl,geschlecht\nLisa,239,w\n"
+    content1 = "vorname,anzahl,geschlecht\nPeter,300,m\n"
     vornamen_test_file_1 = test_path / "vornamen-test-file-1.csv"
     vornamen_test_file_1.write_text(content1, encoding="utf-8")
 
-    content2 = "vorname,anzahl,geschlecht\nPeter,300,m\n"
+    content2 = "vorname,anzahl,geschlecht\nLisa,239,w\n"
     vornamen_test_file_2 = test_path / "vornamen-test-file-2.csv"
     vornamen_test_file_2.write_text(content2, encoding="utf-8")
 
