@@ -1,7 +1,6 @@
 """Test cases for the authors module."""
 import json
 import random
-import sys
 from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import Mock
@@ -209,22 +208,19 @@ def test_create_first_names_data(tmp_path: Path) -> None:
     # setup test files
     setup_test_files(tmp_path)
 
-    content_merged_names = (
-        "vorname,anzahl,geschlecht\nPeter,300,m\nLisa,239,w\nLisa,100,w\n"
-    )
     # write conent to files
     vornamen_merged_file = tmp_path / "first-names-merged-test.csv"
     vornamen_test_file = tmp_path / "first-names-test-2.json"
 
-    validation_file = tmp_path / "first-names-test.json"
+    validation_test_file = tmp_path / "first-names-test.json"
 
     # run the create function
     opendatanames.create_first_names_data(
-        input_file=vornamen_merged_file, out_file=vornamen_test_file
+        input_file=vornamen_merged_file, out_file=str(vornamen_test_file)
     )
 
     with open(vornamen_test_file, "r") as test_file, open(
-        validation_file
+        validation_test_file
     ) as validation_file:
         content_created = json.load(test_file)
         content_validation = json.load(validation_file)
