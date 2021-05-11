@@ -24,7 +24,7 @@ def merge_csvs(
     input_path = input_path if input_path is not None else DATAPATH
 
     # get all csv files in input path
-    csv_list = glob.glob(str(input_path) + "/*.csv")
+    csv_list = sorted(glob.glob(str(input_path) + "/*.csv"))
 
     # set fieldnames
     fieldnames = ["vorname", "anzahl", "geschlecht"]
