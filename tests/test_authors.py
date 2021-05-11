@@ -208,18 +208,23 @@ def test_create_first_names_data(tmp_path: Path) -> None:
     # setup test files
     setup_test_files(tmp_path)
 
-    # write conent to files
+    # write conent to input file
     vornamen_merged_file = tmp_path / "first-names-merged-test.csv"
-    vornamen_test_file = tmp_path / "first-names-test-2.json"
+    with open(vornamen_merged_file, 'a') as test_file:
+        test_file.write("Peter,123,m\n")
 
+    # define outfile
+    vornamen_test_out_file = tmp_path / "first-names-test-2.json"
+
+    # validation file path
     validation_test_file = tmp_path / "first-names-test.json"
 
     # run the create function
     opendatanames.create_first_names_data(
-        input_file=vornamen_merged_file, out_file=str(vornamen_test_file)
+        input_file=vornamen_merged_file, out_file=str(vornamen_test_out_file)
     )
 
-    with open(vornamen_test_file, "r") as test_file, open(
+    with open(vornamen_test_out_file, "r") as test_file, open(
         validation_test_file
     ) as validation_file:
         content_created = json.load(test_file)
