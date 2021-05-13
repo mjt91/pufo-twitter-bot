@@ -2,10 +2,10 @@
 import os
 from unittest.mock import Mock
 
-from pufo_twitter_bot.bot import twitter
-
 import pytest
 import pytest_mock
+
+from pufo_twitter_bot.bot import twitter
 
 
 def test_twitter_api(mock_tweepy_api: Mock) -> None:

@@ -210,7 +210,7 @@ def test_create_first_names_data(tmp_path: Path) -> None:
 
     # write conent to input file
     vornamen_merged_file = tmp_path / "first-names-merged-test.csv"
-    with open(vornamen_merged_file, 'a') as test_file:
+    with open(vornamen_merged_file, "a") as test_file:
         test_file.write("Peter,123,m\n")
 
     # define outfile

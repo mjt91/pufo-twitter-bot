@@ -1,6 +1,6 @@
 """Package-wide test fixtures."""
-from unittest.mock import Mock
 import os
+from unittest.mock import Mock
 
 import pytest
 import tweepy  # type: ignore
@@ -46,10 +46,11 @@ def mock_tweepy_api(mocker: MockFixture) -> Mock:
 def mock_environ_variables(mocker: MockFixture) -> Mock:
     """Fixture for mocking the environment variables for twitter api."""
     return mocker.patch.dict(
-        os.environ, {
+        os.environ,
+        {
             "CONSUMER_KEY": "consumer_test_key",
             "CONSUMER_SECRET": "consumer_test_secret_Key",
-            "ACCESS_TOKEN": "access_test_token", 
-            "ACCESS_TOKEN_SECRET": "access_test_token_secret"
-    })
-    
+            "ACCESS_TOKEN": "access_test_token",
+            "ACCESS_TOKEN_SECRET": "access_test_token_secret",
+        },
+    )
