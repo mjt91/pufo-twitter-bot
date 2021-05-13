@@ -27,6 +27,10 @@ def test_main_succeeds_offenedaten(runner: CliRunner) -> None:
     result = runner.invoke(__main__.main, ["-s", "offenedaten"])
     assert result.exit_code == 0
 
+def test_main_succeeds_with_tweet(runner: CliRunner, mock_tweepy_api: Mock) -> None:
+    """It exits with a status of code zero with tweet option."""
+    result = runner.invoke(__main__.main, ["-c", "2", "--tweet"])
+    assert result.exit_code == 0
 
 @patch("pufo_twitter_bot.__main__.FIRST_NAMES", "tests/data/first-names-test.json")
 @patch("pufo_twitter_bot.__main__.LAST_NAMES", "tests/data/last-names-test.txt")
