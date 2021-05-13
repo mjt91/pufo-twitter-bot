@@ -1,8 +1,8 @@
 """Test cases for the bot module."""
 import os
 from unittest.mock import Mock
-import tweepy  # type: ignore
 
+import click
 import pytest
 
 from pufo_twitter_bot.bot import twitter
@@ -30,7 +30,6 @@ def test_retrieve_keys_with_none(mock_environ_variables: Mock) -> None:
     assert ck is None
 
 
-import click
 def test_create_api_fails(mock_environ_variables: Mock) -> None:
     """It raises an error when one environment variable is missing."""
     del os.environ["CONSUMER_KEY"]

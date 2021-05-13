@@ -1,7 +1,8 @@
 """The twitter functionalities of pufo-twitter-bot."""
 import logging
 import os
-from typing import Tuple, Optional
+from typing import Optional
+from typing import Tuple
 
 import click
 import tweepy  # type: ignore
@@ -11,11 +12,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 
-def retrieve_keys() -> Tuple[str, str, str, str]:
+def retrieve_keys() -> Tuple[
+    Optional[str], Optional[str], Optional[str], Optional[str]
+]:
     """Helper function to retrieve the OS environment variables.
-
-    Raises:
-        OSError: If any environment variable is not set.
 
     Returns:
         Tuple[str]: Returns the environments variables (can be None type)
