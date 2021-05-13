@@ -47,7 +47,6 @@ def create_api() -> API:
     except tweepy.error.TweepError as error:
         message = str(error)
         raise click.ClickException(message)
-        # raise click.ClickException("ERROR")
     click.echo("tweepy api created")
     return api
 
