@@ -44,9 +44,10 @@ def create_api() -> API:
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
     try:
         api.verify_credentials()
-    except KeyError as error:
+    except tweepy.error.TweepError as error:
         message = str(error)
         raise click.ClickException(message)
+        # raise click.ClickException("ERROR")
     click.echo("tweepy api created")
     return api
 
