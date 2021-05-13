@@ -49,6 +49,6 @@ def test_validate_tweet_fails() -> None:
     """The length validation for the tweet fails."""
     with open("./tests/data/tweet-test.txt", "r") as file:
         test_tweet = file.read()
-    
+
     with pytest.raises(ValueError):
         twitter.validate_tweet(test_tweet)
