@@ -1,7 +1,7 @@
 """The twitter functionalities of pufo-twitter-bot."""
 import logging
 import os
-from typing import Tuple
+from typing import Tuple, Optional
 
 import click
 import tweepy  # type: ignore
@@ -18,17 +18,12 @@ def retrieve_keys() -> Tuple[str, str, str, str]:
         OSError: If any environment variable is not set.
 
     Returns:
-        [type]: [description]
+        Tuple[str]: Returns the environments variables (can be None type)
     """
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
     access_token = os.getenv("ACCESS_TOKEN")
     access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
-
-    env_var_list = [consumer_key, consumer_secret, access_token, access_token_secret]
-
-    if any(var is None for var in env_var_list):
-        raise OSError("Environment variables not set.")
 
     return consumer_key, consumer_secret, access_token, access_token_secret
 
