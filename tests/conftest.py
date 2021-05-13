@@ -1,6 +1,7 @@
 """Package-wide test fixtures."""
 import os
 from unittest.mock import Mock
+from typing import Any
 
 import pytest
 import tweepy  # type: ignore
@@ -43,7 +44,7 @@ def mock_tweepy_api(mocker: MockFixture) -> Mock:
 
 
 @pytest.fixture
-def mock_environ_variables(mocker: MockFixture) -> Mock:
+def mock_environ_variables(mocker: MockFixture) -> Any:
     """Fixture for mocking the environment variables for twitter api."""
     return mocker.patch.dict(
         os.environ,
