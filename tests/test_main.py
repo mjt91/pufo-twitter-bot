@@ -27,7 +27,7 @@ def test_main_succeeds_offenedaten(runner: CliRunner) -> None:
     result = runner.invoke(__main__.main, ["-s", "offenedaten"])
     assert result.exit_code == 0
 
-def test_main_succeeds_with_tweet(runner: CliRunner, mock_tweepy_api: Mock) -> None:
+def test_main_succeeds_with_tweet(runner: CliRunner, mock_tweepy_api: Mock, mock_environ_variables: Mock) -> None:
     """It exits with a status of code zero with tweet option."""
     result = runner.invoke(__main__.main, ["-c", "2", "--tweet"])
     assert result.exit_code == 0
