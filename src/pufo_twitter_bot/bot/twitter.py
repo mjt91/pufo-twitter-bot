@@ -65,7 +65,7 @@ def validate_tweet(tweet: str) -> bool:
     """
     str_len = ((tweet).join(tweet)).count(tweet) + 1
     if str_len > 280:
-        raise ValueError("tweet is more than 280 unicode characters")
+        raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
     else:
         return True
 
