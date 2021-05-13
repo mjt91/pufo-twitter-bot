@@ -14,7 +14,6 @@ logger = logging.getLogger()
 def retrieve_keys() -> Tuple[str, str, str, str]:
     """Helper function to retrieve the OS environment variables.
 
-
     Raises:
         OSError: If any environment variable is not set.
 
@@ -29,7 +28,7 @@ def retrieve_keys() -> Tuple[str, str, str, str]:
     env_var_list = [consumer_key, consumer_secret, access_token, access_token_secret]
 
     if any(var is None for var in env_var_list):
-        raise OSError(f"Environment variables not set.")
+        raise OSError("Environment variables not set.")
 
     return consumer_key, consumer_secret, access_token, access_token_secret
 

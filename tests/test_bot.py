@@ -3,7 +3,6 @@ import os
 from unittest.mock import Mock
 
 import pytest
-import pytest_mock
 
 from pufo_twitter_bot.bot import twitter
 
