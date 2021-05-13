@@ -37,3 +37,18 @@ def test_create_api_fails(mock_environ_variables: Mock) -> None:
     # with pytest.raises(tweepy.error.TweepError):
     with pytest.raises(click.ClickException):
         twitter.create_api()
+
+
+def test_validate_tweet_succeeds() -> None:
+    """The length validation for the tweet passes."""
+    test_tweet = "Short Hello"
+    assert twitter.validate_tweet(test_tweet)
+
+
+def test_validate_tweet_fails() -> None:
+    """The length validation for the tweet fails."""
+    with open("./tests/data/tweet-test.txt", "r") as file:
+        test_tweet = file.read()
+    
+    with pytest.raises(ValueError):
+        twitter.validate_tweet(test_tweet)
