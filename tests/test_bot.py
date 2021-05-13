@@ -1,7 +1,11 @@
 """Test cases for the bot module."""
+import os
 from unittest.mock import Mock
 
 from pufo_twitter_bot.bot import twitter
+
+import pytest
+import pytest_mock
 
 
 def test_twitter_api(mock_tweepy_api: Mock) -> None:
@@ -16,3 +20,11 @@ def test_retrieve_keys(mock_environ_variables: Mock) -> None:
     assert cs == "consumer_test_secret_Key"
     assert at == "access_test_token"
     assert ats == "access_test_token_secret"
+
+
+def test_retrieve_keys_fails(mock_environ_variables: Mock, mocker: Mock) -> None:
+    """It raises OSError when environment is not set up."""
+    # Remove mocked consumer key from environ
+    del os.environ["CONSUMER_KEY"]
+    with pytest.raises(OSError):
+        twitter.retrieve_keys()
