@@ -1,5 +1,5 @@
-Pufo Twitter Bot
-================
+Pufo Twitter Bot 🛸
+====================
 
 |PyPI| |Python Version| |License|
 
