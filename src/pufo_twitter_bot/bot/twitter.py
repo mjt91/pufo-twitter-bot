@@ -68,11 +68,3 @@ def validate_tweet(tweet: str) -> bool:
         raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
     else:
         return True
-
-
-if __name__ == "__main__":
-    # Create API object
-    api = create_api()
-
-    # Create a tweet
-    # api.update_status("Hello Tweepy")
