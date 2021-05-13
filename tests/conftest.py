@@ -47,9 +47,9 @@ def mock_environ_variables(mocker: MockFixture) -> Mock:
     """Fixture for mocking the environment variables for twitter api."""
     return mocker.patch.dict(
         os.environ, {
-            "consumer_key": "consumer_test_key",
-            "consumer_secret": "consumer_test_secret_Key",
-            "access_token": "access_test_token", 
-            "access_token_secret": "access_test_token_secret"
+            "CONSUMER_KEY": "consumer_test_key",
+            "CONSUMER_SECRET": "consumer_test_secret_Key",
+            "ACCESS_TOKEN": "access_test_token", 
+            "ACCESS_TOKEN_SECRET": "access_test_token_secret"
     })
     
