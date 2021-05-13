@@ -39,3 +39,16 @@ def mock_randomnames_random_authors(mocker: MockFixture) -> Mock:
 def mock_tweepy_api(mocker: MockFixture) -> Mock:
     """Fixture for mocking tweepy.api object."""
     return mocker.patch.object(tweepy, "API", autospec=True)
+
+
+@pytest.fixture
+def mock_environ_variables(mocker: MockFixture) -> Mock:
+    """Fixture for mocking the environment variables for twitter api."""
+    return mocker.patch.dict(
+        os.environ, {
+            "consumer_key": "consumer_test_key",
+            "consumer_secret": "consumer_test_secret_Key",
+            "access_token": "access_test_token", 
+            "access_token_secret": "access_test_token_secret"
+    })
+    
