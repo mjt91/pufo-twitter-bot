@@ -1,6 +1,7 @@
 """The twitter functionalities of pufo-twitter-bot."""
 import logging
 import os
+from typing import Tuple
 
 import click
 import tweepy  # type: ignore
@@ -8,6 +9,29 @@ from tweepy.api import API  # type: ignore
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
+
+
+def retrieve_keys() -> Tuple[str, str, str, str]:
+    """Helper function to retrieve the OS environment variables.
+
+
+    Raises:
+        OSError: If any environment variable is not set.
+
+    Returns:
+        [type]: [description]
+    """
+    consumer_key = os.getenv("CONSUMER_KEY")
+    consumer_secret = os.getenv("CONSUMER_SECRET")
+    access_token = os.getenv("ACCESS_TOKEN")
+    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+
+    env_var_list = [consumer_key, consumer_secret, access_token, access_token_secret]
+
+    if any(var is None for var in env_var_list):
+        raise OSError(f"Environment variables not set.")
+
+    return consumer_key, consumer_secret, access_token, access_token_secret
 
 
 def create_api() -> API:
@@ -19,10 +43,7 @@ def create_api() -> API:
     Returns:
         API: Returns tweepy API object.
     """
-    consumer_key = os.getenv("CONSUMER_KEY")
-    consumer_secret = os.getenv("CONSUMER_SECRET")
-    access_token = os.getenv("ACCESS_TOKEN")
-    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+    consumer_key, consumer_secret, access_token, access_token_secret = retrieve_keys()
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
