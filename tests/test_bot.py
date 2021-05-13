@@ -1,6 +1,7 @@
 """Test cases for the bot module."""
 import os
 from unittest.mock import Mock
+import tweepy  # type: ignore
 
 import pytest
 
@@ -21,9 +22,19 @@ def test_retrieve_keys(mock_environ_variables: Mock) -> None:
     assert ats == "access_test_token_secret"
 
 
-def test_retrieve_keys_fails(mock_environ_variables: Mock, mocker: Mock) -> None:
-    """It raises OSError when environment is not set up."""
+def test_retrieve_keys_with_none(mock_environ_variables: Mock) -> None:
+    """It returns the variables even if one is of None type."""
     # Remove mocked consumer key from environ
     del os.environ["CONSUMER_KEY"]
-    with pytest.raises(OSError):
-        twitter.retrieve_keys()
+    ck, _, _, _ = twitter.retrieve_keys()
+    assert ck is None
+
+
+import click
+def test_create_api_fails(mock_environ_variables: Mock) -> None:
+    """It raises an error when one environment variable is missing."""
+    del os.environ["CONSUMER_KEY"]
+    click.ClickException
+    # with pytest.raises(tweepy.error.TweepError):
+    with pytest.raises(click.ClickException):
+        twitter.create_api()
