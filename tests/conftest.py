@@ -1,7 +1,7 @@
 """Package-wide test fixtures."""
 import os
-from unittest.mock import Mock
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 import tweepy  # type: ignore
