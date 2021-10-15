@@ -12,59 +12,77 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 
-def retrieve_keys() -> Tuple[
-    Optional[str], Optional[str], Optional[str], Optional[str]
-]:
-    """Helper function to retrieve the OS environment variables.
+class TwitterBot:
+    """The twitter bot."""
 
-    Returns:
-        Tuple[str]: Returns the environments variables (can be None type)
-    """
-    consumer_key = os.getenv("CONSUMER_KEY")
-    consumer_secret = os.getenv("CONSUMER_SECRET")
-    access_token = os.getenv("ACCESS_TOKEN")
-    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+    def __init__(self, tweet: str):
+        """Constructor
 
-    return consumer_key, consumer_secret, access_token, access_token_secret
+        Args:
+            tweet (str): The text to tweet.
+        """
+        self.tweet_str = tweet
+        (
+            self.consumer_key,
+            self.consumer_secret,
+            self.access_token,
+            self.access_token_secret,
+        ) = self.retrieve_keys()
+        self.api = create_api()
 
+    def retrieve_keys(
+        self,
+    ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
+        """Helper function to retrieve the OS environment variables.
 
-def create_api() -> API:
-    """Creates the tweepy API object.
+        Returns:
+            Tuple[str]: Returns the environments variables (can be None type)
+        """
+        consumer_key = os.getenv("CONSUMER_KEY")
+        consumer_secret = os.getenv("CONSUMER_SECRET")
+        access_token = os.getenv("ACCESS_TOKEN")
+        access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
-    Raises:
-        ClickException: raises an exception if it fails to get the ENV tokens.
+        return consumer_key, consumer_secret, access_token, access_token_secret
 
-    Returns:
-        API: Returns tweepy API object.
-    """
-    consumer_key, consumer_secret, access_token, access_token_secret = retrieve_keys()
+    def create_api(self) -> API:
+        """Creates the tweepy API object.
 
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
-    try:
-        api.verify_credentials()
-    except tweepy.error.TweepError as error:
-        message = str(error)
-        raise click.ClickException(message)
-    click.echo("tweepy api created")
-    return api
+        Raises:
+            ClickException: raises an exception if it fails to get the ENV tokens.
 
+        Returns:
+            API: Returns tweepy API object.
+        """
+        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
+        auth.set_access_token(self.access_token, self.access_token_secret)
+        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+        try:
+            api.verify_credentials()
+        except tweepy.error.TweepError as error:
+            message = str(error)
+            raise click.ClickException(message)
+        click.echo("tweepy api created")
+        return api
 
-def validate_tweet(tweet: str) -> bool:
-    """It validates the tweet.
+    def validate_tweet(self, tweet: str) -> bool:
+        """It validates the tweet.
 
-    Args:
-        tweet (str): The text to tweet.
+        Args:
+            tweet (str): The text to tweet.
 
-    Raises:
-        ValueError: Raises if tweet length is more than 280 unicode characters.
+        Raises:
+            ValueError: Raises if tweet length is more than 280 unicode characters.
 
-    Returns:
-        bool: True if validation holds.
-    """
-    str_len = ((tweet).join(tweet)).count(tweet) + 1
-    if str_len > 280:
-        raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
-    else:
-        return True
+        Returns:
+            bool: True if validation holds.
+        """
+        str_len = ((tweet).join(tweet)).count(tweet) + 1
+        if str_len > 280:
+            raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
+        else:
+            return True
+
+    def tweet(self):
+        """Tweet functionality of TwitterBot."""
+        self.api.update_status(self.tweet_str)
