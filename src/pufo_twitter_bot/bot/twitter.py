@@ -27,10 +27,10 @@ class TwitterBot:
             self.consumer_secret,
             self.access_token,
             self.access_token_secret,
-        ) = self.retrieve_keys()
-        self.api = create_api()
+        ) = self._retrieve_keys()
+        self.api = self.create_api()
 
-    def retrieve_keys(
+    def _retrieve_keys(
         self,
     ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
         """Helper function to retrieve the OS environment variables.
@@ -65,24 +65,24 @@ class TwitterBot:
         click.echo("tweepy api created")
         return api
 
-    def validate_tweet(self, tweet: str) -> bool:
-        """It validates the tweet.
-
-        Args:
-            tweet (str): The text to tweet.
-
-        Raises:
-            ValueError: Raises if tweet length is more than 280 unicode characters.
-
-        Returns:
-            bool: True if validation holds.
-        """
-        str_len = ((tweet).join(tweet)).count(tweet) + 1
-        if str_len > 280:
-            raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
-        else:
-            return True
-
     def tweet(self):
         """Tweet functionality of TwitterBot."""
         self.api.update_status(self.tweet_str)
+
+def validate_tweet(tweet: str) -> bool:
+    """It validates the tweet.
+
+    Args:
+        tweet (str): The text to tweet.
+
+    Raises:
+        ValueError: Raises if tweet length is more than 280 unicode characters.
+
+    Returns:
+        bool: True if validation holds.
+    """
+    str_len = ((tweet).join(tweet)).count(tweet) + 1
+    if str_len > 280:
+        raise ValueError(f"tweet is more than 280 unicode characters\n {tweet}")
+    else:
+        return True
