@@ -38,6 +38,23 @@ def mock_randomnames_random_authors(mocker: MockFixture) -> Mock:
 
 
 @pytest.fixture
+def mock_buchtitelgenerator(mocker: MockFixture) -> Mock:
+    """Fixture for mocking books.randombuch.buchtitelgenerator."""
+    mock = mocker.patch(
+        # return a list of 5 books to avoid calling online api
+        "pufo_twitter_bot.books.randombuch.buchtitelgenerator",
+        return_value=[
+            "Foo",
+            "Bar",
+            "FooFoo",
+            "BarBar",
+            "FooBar"
+        ]
+    )
+    return Mock
+
+
+@pytest.fixture
 def mock_tweepy_api(mocker: MockFixture) -> Mock:
     """Fixture for mocking tweepy.api object."""
     return mocker.patch.object(tweepy, "API", autospec=True)
