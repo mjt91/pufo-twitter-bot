@@ -13,7 +13,14 @@ logger = logging.getLogger()
 
 
 class TwitterBot:
-    """The twitter bot."""
+    """The twitter bot class.
+
+    This class is used to have all the twitter functionalities for
+    pufo_twitter_bot package.
+    Usage:
+    >>> from pufo_twitter_bot.bot.twitter import TwitterBot
+    >>> twb = TwitterBot(tweet="Hello World!")
+    """
 
     def __init__(self, tweet: str):
         """Constructor
@@ -68,6 +75,7 @@ class TwitterBot:
     def tweet(self):
         """Tweet functionality of TwitterBot."""
         self.api.update_status(self.tweet_str)
+
 
 def validate_tweet(tweet: str) -> bool:
     """It validates the tweet.

@@ -20,10 +20,12 @@ def test_retrieve_keys(mock_environ_variables: Mock, mock_tweepy_api: Mock) -> N
     assert twb.consumer_key == "consumer_test_key"
     assert twb.consumer_secret == "consumer_test_secret_Key"
     assert twb.access_token == "access_test_token"
-    assert twb.access_token_secret ==  "access_test_token_secret"
+    assert twb.access_token_secret == "access_test_token_secret"
 
 
-def test_retrieve_keys_with_none(mock_environ_variables: Mock, mock_tweepy_api: Mock) -> None:
+def test_retrieve_keys_with_none(
+    mock_environ_variables: Mock, mock_tweepy_api: Mock
+) -> None:
     """It returns the variables even if one is of None type."""
     # Remove mocked consumer key from environ
     del os.environ["CONSUMER_KEY"]
@@ -36,7 +38,7 @@ def test_create_api_fails(mock_environ_variables: Mock) -> None:
     del os.environ["CONSUMER_KEY"]
     # with pytest.raises(tweepy.error.TweepError):
     with pytest.raises(click.ClickException):
-        twb = TwitterBot(tweet="_")
+        _ = TwitterBot(tweet="_")
 
 
 def test_validate_tweet_succeeds() -> None:
