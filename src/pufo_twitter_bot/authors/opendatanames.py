@@ -131,16 +131,13 @@ def random_authors(
         rnd_sample_last_names = random.sample(last_names, count)
 
         if gender == "a":
-            print("I am in a")
             rnd_sample_keys = random.sample(list(first_names.keys()), count)
 
         if gender == "w":
-            print("I am in w")
             first_names_w = {k: v for k, v in first_names.items() if v[1] == "w"}
             rnd_sample_keys = random.sample(list(first_names_w.keys()), count)
 
         if gender == "m":
-            print("I am in m")
             first_names_m = {k: v for k, v in first_names.items() if v[1] == "m"}
             rnd_sample_keys = random.sample(list(first_names_m.keys()), count)
 
