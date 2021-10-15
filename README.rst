@@ -1,5 +1,5 @@
-Pufo Twitter Bot
-================
+Pufo Twitter Bot 🛸
+====================
 
 |PyPI| |Python Version| |License|
 
@@ -43,18 +43,18 @@ The interface provides the possibility to tweet the list on twitter.
    * `count` for number of author/titles
    * `gender` for the gender of the authors
 
-Book titles are in german for now.
+Book titles are in german for now. Multilanguage support maybe coming in the future.
 
 
-Requirements
-------------
+Requirements 📋
+---------------
 
 * python>=3.7,<3.10
 * twitter devloper account (to post to twitter)
 
 
-Installation
-------------
+Installation 🔨
+----------------
 
 You can install *Pufo Twitter Bot* via pip_ from PyPI_:
 
@@ -91,8 +91,8 @@ Distributed under the terms of the `MIT license`_,
 *Pufo Twitter Bot* is free and open source software.
 
 
-Issues
-------
+Issues 📌
+---------
 
 If you encounter any problems,
 please `file an issue`_ along with a detailed description.
