@@ -43,15 +43,9 @@ def mock_buchtitelgenerator(mocker: MockFixture) -> Mock:
     mock = mocker.patch(
         # return a list of 5 books to avoid calling online api
         "pufo_twitter_bot.books.randombuch.buchtitelgenerator",
-        return_value=[
-            "Foo",
-            "Bar",
-            "FooFoo",
-            "BarBar",
-            "FooBar"
-        ]
+        return_value=["Foo", "Bar", "FooFoo", "BarBar", "FooBar"],
     )
-    return Mock
+    return mock
 
 
 @pytest.fixture
