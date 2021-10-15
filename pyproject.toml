@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pufo-twitter-bot"
-version = "0.0.0"
+version = "0.1.0"
 description = "Pufo Twitter Bot"
 authors = ["Marius Theiss <justusbersten@gmail.com>"]
 license = "MIT"
@@ -9,7 +9,6 @@ homepage = "https://github.com/mjt91/pufo-twitter-bot"
 repository = "https://github.com/mjt91/pufo-twitter-bot"
 documentation = "https://pufo-twitter-bot.readthedocs.io"
 classifiers = [
-    "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",

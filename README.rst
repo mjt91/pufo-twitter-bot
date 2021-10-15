@@ -49,8 +49,8 @@ Book titles are in german for now. Multilanguage support maybe coming in the fut
 Requirements 📋
 ---------------
 
-* python>=3.9
-* twitter developer account (to post to twitter)
+* python>=3.7,<3.10
+* twitter devloper account (to post to twitter)
 
 
 Installation 🔨
@@ -132,8 +132,7 @@ This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter
 .. _Hypermodern Python Cookiecutter: https://github.com/cjolowicz/cookiecutter-hypermodern-python
 .. _file an issue: https://github.com/mjt91/pufo-twitter-bot/issues
 .. _pip: https://pip.pypa.io/
-.. github-only
+.. _beer: https://www.buymeacoffee.com/mjt91
+.. _coffee: https://www.buymeacoffee.com/mjt91.. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Usage: https://pufo-twitter-bot.readthedocs.io/en/latest/usage.html
-.. _beer: https://www.buymeacoffee.com/mjt91
-.. _coffee: https://www.buymeacoffee.com/mjt91

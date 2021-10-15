@@ -1,4 +1,6 @@
 """Package-wide test fixtures."""
+import os
+from typing import Any
 from unittest.mock import Mock
 
 import pytest
@@ -39,3 +41,17 @@ def mock_randomnames_random_authors(mocker: MockFixture) -> Mock:
 def mock_tweepy_api(mocker: MockFixture) -> Mock:
     """Fixture for mocking tweepy.api object."""
     return mocker.patch.object(tweepy, "API", autospec=True)
+
+
+@pytest.fixture
+def mock_environ_variables(mocker: MockFixture) -> Any:
+    """Fixture for mocking the environment variables for twitter api."""
+    return mocker.patch.dict(
+        os.environ,
+        {
+            "CONSUMER_KEY": "consumer_test_key",
+            "CONSUMER_SECRET": "consumer_test_secret_Key",
+            "ACCESS_TOKEN": "access_test_token",
+            "ACCESS_TOKEN_SECRET": "access_test_token_secret",
+        },
+    )

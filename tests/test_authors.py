@@ -1,7 +1,6 @@
 """Test cases for the authors module."""
 import json
 import random
-import sys
 from collections.abc import Iterator
 from pathlib import Path
 from unittest.mock import Mock
@@ -97,19 +96,29 @@ class TestRandomNames:
             randomnames.random_authors()
 
 
-def setup_test_files(test_path: Path) -> None:
+def setup_test_files(test_path: Path, merged_file: bool = True) -> None:
     """Creates a copy of all test files in the separate test folders."""
+    # write first-names input data (two files)
+    content1 = "vorname,anzahl,geschlecht\nPeter,300,m\n"
+    vornamen_test_file_1 = test_path / "vornamen-test-file-1.csv"
+    vornamen_test_file_1.write_text(content1, encoding="utf-8")
+
+    content2 = "vorname,anzahl,geschlecht\nLisa,239,w\n"
+    vornamen_test_file_2 = test_path / "vornamen-test-file-2.csv"
+    vornamen_test_file_2.write_text(content2, encoding="utf-8")
+
     # read and write first-names data
     with open("./tests/data/first-names-test.json", "r", encoding="utf-8") as file:
         content = file.read()
         firstnames_test_file = test_path / "first-names-test.json"
         firstnames_test_file.write_text(content, encoding="utf-8")
 
-    # read and write merged data
-    with open("./tests/data/first-names-merged.csv", "r", encoding="utf-8") as file:
-        content = file.read()
-        firstnames_merged_test_file = test_path / "first-names-merged-test.csv"
-        firstnames_merged_test_file.write_text(content, encoding="utf-8")
+    if merged_file:
+        # read and write merged data
+        with open("./tests/data/first-names-merged.csv", "r", encoding="utf-8") as file:
+            content = file.read()
+            firstnames_merged_test_file = test_path / "first-names-merged-test.csv"
+            firstnames_merged_test_file.write_text(content, encoding="utf-8")
 
     # read and write last-names data
     with open("./tests/data/last-names-test.txt", "r", encoding="utf-8") as file:
@@ -175,58 +184,19 @@ def test_random_authors_fallback_fails_with_unknown_gender() -> None:
         )
 
 
-@pytest.mark.skipif(
-    sys.platform.startswith("linux"), reason="parsing works different on linux"
-)
 def test_merge_csvs_windows(tmp_path: Path) -> None:
     """It merges the csvs correctly."""
-    # set up temp path folder
-    data_test_path = tmp_path / "data"
-    data_test_path.mkdir()
-    # set up temp vornamen files to merge
-    content1 = "vorname,anzahl,geschlecht\nLisa,239,w"
-    content2 = "vorname,anzahl,geschlecht\nPeter,300,m"
-    vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
-    vornamen_test_file_1.write_text(content1, encoding="utf-8")
-    vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
-    vornamen_test_file_2.write_text(content2, encoding="utf-8")
+    setup_test_files(tmp_path, merged_file=False)
 
-    test_out_file = data_test_path / "test-data-merged.csv"
-    test_input_path = str(data_test_path) + "/"
+    test_out_file = tmp_path / "test-data-merged-2.csv"
+    test_input_path = tmp_path
 
     opendatanames.merge_csvs(out_file=test_out_file, input_path=test_input_path)
+
+    test_validation_file = Path("./tests/data/first-names-merged.csv")
 
     with open(test_out_file, encoding="utf-8") as test_file, open(
-        "./tests/data/first-names-merged.csv", encoding="utf-8"
-    ) as validation_file:
-        content_merged = test_file.read()
-        content_validation = validation_file.read()
-        assert content_merged == content_validation
-
-
-@pytest.mark.skipif(
-    sys.platform.startswith("win"), reason="parsing works different on windows"
-)
-def test_merge_csvs_linux(tmp_path: Path) -> None:
-    """It merges the csvs correctly."""
-    # set up temp path folder
-    data_test_path = tmp_path / "data"
-    data_test_path.mkdir()
-    # set up temp vornamen files to merge
-    content1 = "vorname,anzahl,geschlecht\nPeter,300,m"
-    content2 = "vorname,anzahl,geschlecht\nLisa,239,w"
-    vornamen_test_file_1 = data_test_path / "vornamen-test-file-1.csv"
-    vornamen_test_file_1.write_text(content1)
-    vornamen_test_file_2 = data_test_path / "vornamen-test-file-2.csv"
-    vornamen_test_file_2.write_text(content2)
-
-    test_out_file = data_test_path / "test-data-merged.csv"
-    test_input_path = str(data_test_path) + "/"
-
-    opendatanames.merge_csvs(out_file=test_out_file, input_path=test_input_path)
-
-    with open(test_out_file) as test_file, open(
-        "./tests/data/first-names-merged.csv", encoding="utf-8"
+        test_validation_file, encoding="utf-8"
     ) as validation_file:
         content_merged = test_file.read()
         content_validation = validation_file.read()
@@ -235,25 +205,27 @@ def test_merge_csvs_linux(tmp_path: Path) -> None:
 
 def test_create_first_names_data(tmp_path: Path) -> None:
     """It creates the first names dict correctly."""
-    # set up temp path folder
-    data_test_path = tmp_path / "data"
-    data_test_path.mkdir()
-    # set up temp vornamen files to test
-    content_merged_names = (
-        "vorname,anzahl,geschlecht\nPeter,300,m\nLisa,239,w\nLisa,100,w\n"
-    )
-    # write conent to files
-    vornamen_merged_file = data_test_path / "first-names-merged.csv"
-    vornamen_merged_file.write_text(content_merged_names)
-    vornamen_test_file = data_test_path / "first-names-test.json"
-    # vornamen_test_file.write_text(content_fnames)
+    # setup test files
+    setup_test_files(tmp_path)
+
+    # write conent to input file
+    vornamen_merged_file = tmp_path / "first-names-merged-test.csv"
+    with open(vornamen_merged_file, "a") as test_file:
+        test_file.write("Peter,123,m\n")
+
+    # define outfile
+    vornamen_test_out_file = tmp_path / "first-names-test-2.json"
+
+    # validation file path
+    validation_test_file = tmp_path / "first-names-test.json"
+
     # run the create function
     opendatanames.create_first_names_data(
-        input_file=vornamen_merged_file, out_file=vornamen_test_file
+        input_file=vornamen_merged_file, out_file=str(vornamen_test_out_file)
     )
 
-    with open(vornamen_test_file, "r") as test_file, open(
-        "./tests/data/first-names-test.json"
+    with open(vornamen_test_out_file, "r") as test_file, open(
+        validation_test_file
     ) as validation_file:
         content_created = json.load(test_file)
         content_validation = json.load(validation_file)
