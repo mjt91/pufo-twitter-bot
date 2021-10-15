@@ -49,7 +49,7 @@ Book titles are in german for now.
 Requirements
 ------------
 
-* python>=3.9
+* python>=3.7,<3.10
 * twitter devloper account (to post to twitter)
 
 
