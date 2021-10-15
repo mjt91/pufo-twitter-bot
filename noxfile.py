@@ -10,7 +10,7 @@ from nox_poetry import session
 
 
 package = "pufo_twitter_bot"
-python_versions = ["3.9"]
+python_versions = ["3.7", "3.8", "3.9"]
 nox.options.sessions = (
     "pre-commit",
     "mypy",

@@ -9,6 +9,8 @@ homepage = "https://github.com/mjt91/pufo-twitter-bot"
 repository = "https://github.com/mjt91/pufo-twitter-bot"
 documentation = "https://pufo-twitter-bot.readthedocs.io"
 classifiers = [
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
 
