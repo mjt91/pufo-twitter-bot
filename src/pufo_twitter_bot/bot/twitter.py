@@ -1,5 +1,6 @@
 """The twitter functionalities of pufo-twitter-bot."""
 import os
+from typing import Any
 from typing import Optional
 from typing import Tuple
 
@@ -36,7 +37,7 @@ class TwitterBot:
         return self._tweet
 
     @tweet.setter
-    def tweet(self, value):
+    def tweet(self, value: Any) -> None:
         if not isinstance(value, str):
             raise TypeError("tweet must be of type `str`.")
         self._tweet = value
