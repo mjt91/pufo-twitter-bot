@@ -102,7 +102,7 @@ def safety(session: Session) -> None:
     session.run("safety", "check", f"--file={requirements}", "--bare")
 
 
-@session(python=python_versions)
+@session(python=["3.8", "3.9"])
 def mypy(session: Session) -> None:
     """Type-check using mypy."""
     args = session.posargs or ["src", "tests", "docs/conf.py"]
