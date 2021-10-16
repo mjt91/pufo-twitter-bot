@@ -84,3 +84,17 @@ def test_main_prints_message_on_request_error(
     mock_requests_get.side_effect = requests.RequestException
     result = runner.invoke(__main__.main)
     assert "Error" in result.output
+
+
+@pytest.mark.e2e
+def test_main_succeeds_in_production_env(runner):
+    """It exits with a status code of zero (end-to-end)."""
+    result = runner.invoke(__main__.main)
+    assert result.exit_code == 0
+
+
+@pytest.mark.e2e
+def test_main_succeeds_source_offenedaten_in_production_env(runner):
+    """It exits with a status code of zero (end-to-end)."""
+    result = runner.invoke(__main__.main, ["-s", "offenedaten"])
+    assert result.exit_code == 0
