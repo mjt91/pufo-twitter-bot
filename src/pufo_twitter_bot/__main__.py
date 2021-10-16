@@ -80,7 +80,7 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
         twb = TwitterBot(tweet_txt)
 
         # tweet status update
-        twb.tweet()
+        twb.send()
 
 
 if __name__ == "__main__":

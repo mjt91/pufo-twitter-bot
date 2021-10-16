@@ -25,7 +25,7 @@ class TwitterBot:
         Args:
             tweet (str): The text to tweet.
         """
-        self.tweet_str = tweet
+        self.tweet = tweet
         (
             self.consumer_key,
             self.consumer_secret,
@@ -33,6 +33,17 @@ class TwitterBot:
             self.access_token_secret,
         ) = self._retrieve_keys()
         self.api = self.create_api()
+
+    @property
+    def tweet(self) -> str:
+        """tweet property."""
+        return self._tweet
+
+    @tweet.setter
+    def tweet(self, value):
+        if not isinstance(value, str):
+            raise TypeError("tweet must be of type `str`.")
+        self._tweet = value
 
     def _retrieve_keys(
         self,
@@ -69,9 +80,9 @@ class TwitterBot:
         click.echo("tweepy api created")
         return api
 
-    def tweet(self) -> None:
+    def send(self) -> None:
         """Tweet functionality of TwitterBot."""
-        self.api.update_status(self.tweet_str)
+        self.api.update_status(self.tweet)
 
 
 def validate_tweet(tweet: str) -> bool:
