@@ -1,4 +1,6 @@
 """The twitter functionalities of pufo-twitter-bot."""
+from __future__ import annotations
+
 import os
 from typing import Any
 from typing import TypeVar
@@ -6,9 +8,6 @@ from typing import TypeVar
 import click
 import tweepy  # type: ignore
 from tweepy.api import API  # type: ignore
-
-
-TwitterBot = TypeVar("TwitterBot")
 
 
 class TwitterBot:
