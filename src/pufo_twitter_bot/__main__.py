@@ -1,13 +1,16 @@
 """Command-line interface."""
+from pathlib import Path
+
 import click
 
+import pufo_twitter_bot
 from .authors import opendatanames
 from .authors import randomnames
 from .books import randombuch
 from .bot.twitter import TwitterBot
 
-FIRST_NAMES = "./data/first-names.json"
-LAST_NAMES = "./data/last-names.txt"
+FIRST_NAMES: Path = Path(pufo_twitter_bot.__file__).parent / "data/first-names.json"
+LAST_NAMES: Path = Path(pufo_twitter_bot.__file__).parent / "data/last-names.txt"
 
 
 @click.command()
