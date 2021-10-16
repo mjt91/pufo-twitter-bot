@@ -17,9 +17,6 @@ class TwitterBot:
 
     This class is used to have all the twitter functionalities for
     pufo_twitter_bot package.
-    Usage:
-    >>> from pufo_twitter_bot.bot.twitter import TwitterBot
-    >>> twb = TwitterBot(tweet="Hello World!")
     """
 
     def __init__(self, tweet: str):
@@ -72,13 +69,13 @@ class TwitterBot:
         click.echo("tweepy api created")
         return api
 
-    def tweet(self):
+    def tweet(self) -> None:
         """Tweet functionality of TwitterBot."""
         self.api.update_status(self.tweet_str)
 
 
 def validate_tweet(tweet: str) -> bool:
-    """It validates the tweet.
+    """It validates a tweet.
 
     Args:
         tweet (str): The text to tweet.
