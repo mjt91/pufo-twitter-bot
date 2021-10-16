@@ -1,5 +1,4 @@
 """The twitter functionalities of pufo-twitter-bot."""
-import logging
 import os
 from typing import Optional
 from typing import Tuple
@@ -7,9 +6,6 @@ from typing import Tuple
 import click
 import tweepy  # type: ignore
 from tweepy.api import API  # type: ignore
-
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger()
 
 
 class TwitterBot:
