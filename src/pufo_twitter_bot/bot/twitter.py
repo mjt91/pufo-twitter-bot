@@ -16,7 +16,7 @@ class TwitterBot:
     """
 
     def __init__(self, tweet: str):
-        """Constructor
+        """Constructor.
 
         Args:
             tweet (str): The text to tweet.
@@ -32,7 +32,7 @@ class TwitterBot:
 
     @property
     def tweet(self) -> str:
-        """tweet property."""
+        """The tweet property."""
         return self._tweet
 
     @tweet.setter
