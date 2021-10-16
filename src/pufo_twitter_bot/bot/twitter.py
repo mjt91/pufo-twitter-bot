@@ -23,12 +23,6 @@ class TwitterBot:
             tweet (str): The text to tweet.
         """
         self.tweet = tweet
-        (
-            self.consumer_key,
-            self.consumer_secret,
-            self.access_token,
-            self.access_token_secret,
-        ) = self._retrieve_keys()
         self.api = self.create_api()
 
     @property
@@ -50,12 +44,12 @@ class TwitterBot:
         Returns:
             Tuple[str]: Returns the environments variables (can be None type)
         """
-        consumer_key = os.getenv("CONSUMER_KEY")
-        consumer_secret = os.getenv("CONSUMER_SECRET")
-        access_token = os.getenv("ACCESS_TOKEN")
-        access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
+        self.consumer_key = os.getenv("CONSUMER_KEY")
+        self.consumer_secret = os.getenv("CONSUMER_SECRET")
+        self.access_token = os.getenv("ACCESS_TOKEN")
+        self.access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
-        return consumer_key, consumer_secret, access_token, access_token_secret
+        return self
 
     def create_api(self) -> API:
         """Creates the tweepy API object.
@@ -66,6 +60,9 @@ class TwitterBot:
         Returns:
             API: Returns tweepy API object.
         """
+        # Get all API keys from ENV variables
+        self._retrieve_keys()
+
         auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
         auth.set_access_token(self.access_token, self.access_token_secret)
         api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
