@@ -1,6 +1,7 @@
 """Test cases for the bot module."""
 import os
 from unittest.mock import Mock
+from typing import Any
 
 import click
 import pytest
@@ -63,9 +64,21 @@ def test_twitterbot_tweet_prop(
     assert isinstance(twb.tweet, str)
 
 
+grid_input_setter_fail = [
+    (TypeError, {"tweet": 1}),
+    (TypeError, {"tweet": ["a"]}),
+]
+
+
+@pytest.fixture(params=grid_input_setter_fail, scope="function")
+def input_setter_fail(request: Any) -> Any:
+    return request.param
+
+
 def test_twitterbot_setter_fail(
-    mock_environ_variables: Mock, mock_tweepy_api: Mock
+    mock_environ_variables: Mock, mock_tweepy_api: Mock, input_setter_fail: Any
 ) -> None:
     """It raises the respective error."""
-    with pytest.raises(TypeError):
-        _ = TwitterBot(tweet=1)
+    err, params = input_setter_fail
+    with pytest.raises(err):
+        _ = TwitterBot(**params)
