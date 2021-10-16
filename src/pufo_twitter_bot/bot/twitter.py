@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import os
 from typing import Any
-from typing import TypeVar
 
 import click
 import tweepy  # type: ignore
