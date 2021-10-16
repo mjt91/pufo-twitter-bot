@@ -53,3 +53,15 @@ def test_validate_tweet_fails() -> None:
         test_tweet = file.read()
     with pytest.raises(ValueError):
         twitter.validate_tweet(test_tweet)
+
+
+def test_twitterbot_tweet_prop(mock_environ_variables: Mock, mock_tweepy_api: Mock) -> None:
+    """It returns the tweet property."""
+    twb = TwitterBot(tweet="Test Tweet")
+    assert isinstance(twb.tweet, str)
+
+
+def test_twitterbot_setter_fail(mock_environ_variables: Mock, mock_tweepy_api: Mock) -> None:
+    """It raises the respective error."""
+    with pytest.raises(TypeError):
+        _ = TwitterBot(tweet=1)
