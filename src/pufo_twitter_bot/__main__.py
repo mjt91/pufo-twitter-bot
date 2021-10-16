@@ -4,7 +4,7 @@ import click
 from .authors import opendatanames
 from .authors import randomnames
 from .books import randombuch
-from .bot import twitter
+from .bot.twitter import TwitterBot
 
 FIRST_NAMES = "./data/first-names.json"
 LAST_NAMES = "./data/last-names.txt"
@@ -76,14 +76,11 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
                 tweet_txt += entry + "\n"
 
     if tweet:
-        # validate tweet
-        twitter.validate_tweet(tweet_txt)
-
-        # create twitter api
-        api = twitter.create_api()
+        # set up twitter bot instance
+        twb = TwitterBot(tweet_txt)
 
         # tweet status update
-        api.update_status(tweet_txt)
+        twb.send()
 
 
 if __name__ == "__main__":
