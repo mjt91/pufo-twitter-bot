@@ -1,7 +1,7 @@
 """Test cases for the bot module."""
 import os
-from unittest.mock import Mock
 from typing import Any
+from unittest.mock import Mock
 
 import click
 import pytest
@@ -72,6 +72,7 @@ grid_input_setter_fail = [
 
 @pytest.fixture(params=grid_input_setter_fail, scope="function")
 def input_setter_fail(request: Any) -> Any:
+    """Input fixture for failing setter tests."""
     return request.param
 
 
