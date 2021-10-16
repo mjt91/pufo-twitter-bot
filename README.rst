@@ -133,6 +133,7 @@ This project was generated from `@cjolowicz`_'s `Hypermodern Python Cookiecutter
 .. _file an issue: https://github.com/mjt91/pufo-twitter-bot/issues
 .. _pip: https://pip.pypa.io/
 .. _beer: https://www.buymeacoffee.com/mjt91
-.. _coffee: https://www.buymeacoffee.com/mjt91.. github-only
+.. _coffee: https://www.buymeacoffee.com/mjt91
+.. github-only
 .. _Contributor Guide: CONTRIBUTING.rst
 .. _Usage: https://pufo-twitter-bot.readthedocs.io/en/latest/usage.html
