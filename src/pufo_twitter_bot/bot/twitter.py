@@ -1,12 +1,14 @@
 """The twitter functionalities of pufo-twitter-bot."""
 import os
 from typing import Any
-from typing import Optional
-from typing import Tuple
+from typing import TypeVar
 
 import click
 import tweepy  # type: ignore
 from tweepy.api import API  # type: ignore
+
+
+TwitterBot = TypeVar("TwitterBot")
 
 
 class TwitterBot:
@@ -38,11 +40,11 @@ class TwitterBot:
 
     def _retrieve_keys(
         self,
-    ) -> Tuple[Optional[str], Optional[str], Optional[str], Optional[str]]:
+    ) -> TwitterBot:
         """Helper function to retrieve the OS environment variables.
 
         Returns:
-            Tuple[str]: Returns the environments variables (can be None type)
+            TwitterBot: Returns self.
         """
         self.consumer_key = os.getenv("CONSUMER_KEY")
         self.consumer_secret = os.getenv("CONSUMER_SECRET")
