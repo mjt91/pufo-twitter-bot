@@ -27,7 +27,7 @@ beautifulsoup4 = "^4.9.3"
 tweepy = "^3.10.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.2.2"
+pytest = "^6.2.5"
 pytest-mock = "^3.5.1"
 coverage = {extras = ["toml"], version = "^5.4"}
 safety = "^1.10.3"
