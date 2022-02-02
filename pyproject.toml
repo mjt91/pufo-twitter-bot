@@ -25,6 +25,7 @@ marshmallow = "^3.11.1"
 desert = "^2020.11.18"
 beautifulsoup4 = "^4.9.3"
 tweepy = "^3.10.0"
+python-dotenv = "^0.19.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

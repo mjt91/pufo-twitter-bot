@@ -7,7 +7,7 @@ from typing import Any
 import click
 import tweepy  # type: ignore
 from tweepy.api import API  # type: ignore
-
+from dotenv import load_dotenv
 
 class TwitterBot:
     """The twitter bot class.
@@ -44,6 +44,7 @@ class TwitterBot:
         Returns:
             TwitterBot: Returns self.
         """
+        load_dotenv()
         self.consumer_key = os.getenv("CONSUMER_KEY")
         self.consumer_secret = os.getenv("CONSUMER_SECRET")
         self.access_token = os.getenv("ACCESS_TOKEN")
