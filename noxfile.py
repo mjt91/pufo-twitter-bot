@@ -31,8 +31,8 @@ def activate_virtualenv_in_precommit_hooks(session: Session) -> None:
     Args:
         session: The Session object.
     """
-    if session.bin is None:
-        return
+    # if session.bin is None:
+    #     return
 
     virtualenv = session.env.get("VIRTUAL_ENV")
     if virtualenv is None:
@@ -129,7 +129,7 @@ def tests(session: Session) -> None:
 def coverage(session: Session) -> None:
     """Produce the coverage report."""
     # Do not use session.posargs unless this is the only session.
-    nsessions = len(session._runner.manifest)  # type: ignore[attr-defined]
+    nsessions = len(session._runner.manifest)
     has_args = session.posargs and nsessions == 1
     args = session.posargs if has_args else ["report"]
 
