@@ -70,7 +70,7 @@ class TwitterBot:
             api.verify_credentials()
         except tweepy.error.TweepError as error:
             message = str(error)
-            raise click.ClickException(message)
+            raise click.ClickException(message) from error
         click.echo("tweepy api created")
         return api
 
