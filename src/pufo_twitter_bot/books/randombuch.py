@@ -25,15 +25,16 @@ def buchtitelgenerator() -> List[str]:
             content = response.content
 
             soup = BeautifulSoup(content, "html.parser")
-            
-            # As of November 2022 the site got slight changes that
-            # return a list of paragraphs, the two last ones are empty HTML p-tags
+
+            # As of November 2022 the site got slight changes that now
+            # returns a list of paragraphs, the two last ones are empty HTML p-tags
             container = soup.find("div", class_="entry clr")
             paragraphs = container.find_all("p")
+            # Only first five entries
             books = [book.text for book in paragraphs[:5]]
 
             return [book.strip() for book in books]
 
     except requests.RequestException as error:
         message = str(error)
-        raise click.ClickException(message)
+        raise click.ClickException(message) from error

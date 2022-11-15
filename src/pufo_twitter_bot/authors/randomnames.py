@@ -94,4 +94,4 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
 
     except (requests.RequestException, marshmallow.ValidationError) as error:
         message = str(error)
-        raise click.ClickException(message)
+        raise click.ClickException(message) from error
