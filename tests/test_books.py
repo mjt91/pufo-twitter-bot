@@ -16,7 +16,7 @@ def test_buchtitelgenerator_returns_list(mock_buchtitelgenerator: Mock) -> None:
 
 
 def test_buchtitelgenerator_returns_mocked_books(mock_buchtitelgenerator: Mock) -> None:
-    """'Foo' is part of books."""
+    """The 'Foo' book is part of books."""
     books = randombuch.buchtitelgenerator()
     assert "Foo" in books
 
@@ -39,4 +39,4 @@ def test_buchtitelgenerator_raises(mock_get: Mock) -> None:
 def test_buchtitel_generator() -> None:
     """Books is a non-empty list."""
     books = randombuch.buchtitelgenerator()
-    assert not(len(books) == 0)
+    assert not (len(books) == 0)
