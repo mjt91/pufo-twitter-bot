@@ -16,7 +16,7 @@ def test_buchtitelgenerator_returns_list(mock_buchtitelgenerator: Mock) -> None:
 
 
 def test_buchtitelgenerator_returns_mocked_books(mock_buchtitelgenerator: Mock) -> None:
-    """It returns a list."""
+    """'Foo' is part of books."""
     books = randombuch.buchtitelgenerator()
     assert "Foo" in books
 
@@ -34,3 +34,9 @@ def test_buchtitelgenerator_raises(mock_get: Mock) -> None:
     mock_get.side_effect = requests.RequestException
     with pytest.raises(click.ClickException):
         randombuch.buchtitelgenerator()
+
+
+def test_buchtitel_generator() -> None:
+    """Books is a non-empty list."""
+    books = randombuch.buchtitelgenerator()
+    assert not(len(books) == 0)

@@ -6,7 +6,8 @@ import requests
 from bs4 import BeautifulSoup  # type: ignore
 
 
-BOOK_URL = "https://www.buchtitelgenerator.de/"
+# BOOK_URL = "https://www.buchtitelgenerator.de/"
+BOOK_URL = "https://buchtitelgenerator.de/generator/"
 
 
 def buchtitelgenerator() -> List[str]:
@@ -24,9 +25,14 @@ def buchtitelgenerator() -> List[str]:
             content = response.content
 
             soup = BeautifulSoup(content, "html.parser")
-            books = soup.find_all("div", class_="panel-heading")
+            
+            # As of November 2022 the site got slight changes that
+            # return a list of paragraphs, the two last ones are empty HTML p-tags
+            container = soup.find("div", class_="entry clr")
+            paragraphs = container.find_all("p")
+            books = [book.text for book in paragraphs[:5]]
 
-            return [book.text.strip() for book in books]
+            return [book.strip() for book in books]
 
     except requests.RequestException as error:
         message = str(error)
