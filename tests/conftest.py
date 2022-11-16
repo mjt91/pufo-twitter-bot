@@ -5,13 +5,7 @@ from unittest.mock import Mock
 
 import pytest
 import tweepy  # type: ignore
-from _pytest.config import Config
 from pytest_mock import MockFixture
-
-
-def pytest_configure(config: Config) -> None:
-    """Pytest configuration hook."""
-    config.addinivalue_line("markers", "e2e: mark as end-to-end test.")
 
 
 @pytest.fixture
