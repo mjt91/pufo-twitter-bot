@@ -38,6 +38,7 @@ def test_main_succeeds_with_tweet(
     result = runner.invoke(__main__.main, ["-c", "2", "--tweet"])
     assert result.exit_code == 0
 
+
 @pytest.mark.skip(reason="FIX mocker for requests get!!")
 @patch("pufo_twitter_bot.__main__.FIRST_NAMES", "tests/data/first-names-test.json")
 @patch("pufo_twitter_bot.__main__.LAST_NAMES", "tests/data/last-names-test.txt")
