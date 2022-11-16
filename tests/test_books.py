@@ -35,6 +35,7 @@ def test_buchtitelgenerator_raises(mock_get: Mock) -> None:
     with pytest.raises(click.ClickException):
         randombuch.buchtitelgenerator()
 
+
 @pytest.mark.skip(reason="This causes traffic for buchtitelgenerator.de!")
 def test_buchtitel_generator() -> None:
     """Books is a non-empty list."""
