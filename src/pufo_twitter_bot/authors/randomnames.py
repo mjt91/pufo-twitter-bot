@@ -33,11 +33,11 @@ class AuthorList:
 
     """
 
-    authors: List[Author] = desert.field(
+    authors: List[Author] = desert.field(  # type: ignore
         marshmallow_field=marshmallow.fields.List(
             marshmallow.fields.Nested(AuthorSchema)
         )
-    )  # type: ignore
+    )
 
     # index to make AuthorList iterable
     _index = 0
