@@ -63,9 +63,9 @@ class TwitterBot:
         # Get all API keys from ENV variables
         self._retrieve_keys()
 
-        auth = tweepy.OAuthHandler(self.consumer_key, self.consumer_secret)
-        auth.set_access_token(self.access_token, self.access_token_secret)
-        api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
+        auth = tweepy.OAuth2AppHandler(self.consumer_key, self.consumer_secret)
+        # auth.set_access_token(self.access_token, self.access_token_secret)
+        api = tweepy.API(auth)
         try:
             api.verify_credentials()
         except tweepy.error.TweepError as error:
