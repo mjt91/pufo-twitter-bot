@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from unittest.mock import patch
 
 import pytest
-import requests # type: ignore
+import requests  # type: ignore
 from click.testing import CliRunner
 
 from pufo_twitter_bot import __main__

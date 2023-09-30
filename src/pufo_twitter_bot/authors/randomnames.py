@@ -5,7 +5,7 @@ from typing import List
 import click
 import desert
 import marshmallow
-import requests # type: ignore
+import requests  # type: ignore
 
 
 @dataclass
