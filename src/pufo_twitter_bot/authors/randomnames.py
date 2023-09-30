@@ -5,7 +5,7 @@ from typing import List
 import click
 import desert
 import marshmallow
-import requests
+import requests  # type: ignore
 
 
 @dataclass
@@ -33,7 +33,7 @@ class AuthorList:
 
     """
 
-    authors: List[Author] = desert.field(  # type: ignore
+    authors: List[Author] = desert.field(
         marshmallow_field=marshmallow.fields.List(
             marshmallow.fields.Nested(AuthorSchema)
         )
@@ -86,7 +86,7 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     url = API_URL.format(count=count, gender=gender)
 
     try:
-        with requests.get(url) as response:
+        with requests.get(url) as response:  # noqa.
             response.raise_for_status()
             data = response.json()
 

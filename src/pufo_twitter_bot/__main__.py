@@ -70,7 +70,7 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
 
     for i, author in enumerate(author_list.authors):
         book = book_list[i]
-        entry = f"{i+1}. '{book}' von {author.firstname} {author.lastname}"
+        entry = f"{i+1}. '{book!r}' von {author.firstname} {author.lastname}"
         click.echo(entry)
         if tweet:
             if i == 0:

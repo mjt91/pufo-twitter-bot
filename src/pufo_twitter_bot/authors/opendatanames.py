@@ -142,7 +142,7 @@ def random_authors(
             rnd_sample_keys = random.sample(list(first_names_m.keys()), count)
 
         first_names_list = []
-        for key, last_name in zip(rnd_sample_keys, rnd_sample_last_names):
+        for key, last_name in zip(rnd_sample_keys, rnd_sample_last_names):  # noqa.
             fnames_dict = {"firstname": first_names[key][0], "lastname": last_name}
             first_names_list.append(fnames_dict)
 

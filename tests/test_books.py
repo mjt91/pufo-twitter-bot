@@ -4,7 +4,7 @@ from unittest.mock import Mock
 
 import click
 import pytest
-import requests
+import requests  # type: ignore
 
 from pufo_twitter_bot.books import randombuch
 
