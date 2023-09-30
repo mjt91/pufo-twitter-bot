@@ -2,7 +2,7 @@
 from typing import List
 
 import click
-import requests
+import requests # type: ignore
 from bs4 import BeautifulSoup  # type: ignore
 
 

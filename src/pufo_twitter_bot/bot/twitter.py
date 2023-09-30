@@ -50,7 +50,7 @@ class TwitterBot:
         self.bearer_token = os.getenv("BEARER_TOKEN")
         return self
 
-    def create_api(self) -> API:
+    def create_client(self) -> API:
         """Creates the tweepy API object.
 
         Returns:
