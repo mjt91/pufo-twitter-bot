@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pufo-twitter-bot"
-version = "0.3.0"
+version = "0.4.0"
 description = "Pufo Twitter Bot"
 authors = ["Marius Theiss <justusbersten@gmail.com>"]
 license = "MIT"
