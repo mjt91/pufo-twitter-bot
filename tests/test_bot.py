@@ -1,13 +1,14 @@
 """Test cases for the bot module."""
-import os
+# import os
 from typing import Any
 from unittest.mock import Mock
 
-import click
 import pytest
 
 from pufo_twitter_bot.bot import twitter
 from pufo_twitter_bot.bot.twitter import TwitterBot
+
+# import click
 
 
 def test_twitter_api(mock_tweepy_api: Mock) -> None:

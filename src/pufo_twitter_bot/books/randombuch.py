@@ -20,7 +20,7 @@ def buchtitelgenerator() -> List[str]:
         List[str]: list with 5 strings with book titles.
     """
     try:
-        with requests.get(BOOK_URL) as response:
+        with requests.get(BOOK_URL) as response:  # noqa.
             response.raise_for_status()
             content = response.content
 

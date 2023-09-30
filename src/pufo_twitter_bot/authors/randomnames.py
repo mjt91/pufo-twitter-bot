@@ -86,7 +86,7 @@ def random_authors(count: int = 10, gender: str = "a") -> AuthorList:
     url = API_URL.format(count=count, gender=gender)
 
     try:
-        with requests.get(url) as response:
+        with requests.get(url) as response:  # noqa.
             response.raise_for_status()
             data = response.json()
 

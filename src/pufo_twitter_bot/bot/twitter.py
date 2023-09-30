@@ -4,7 +4,6 @@ from __future__ import annotations
 import os
 from typing import Any
 
-import click
 import tweepy  # type: ignore
 from tweepy.api import API  # type: ignore
 
@@ -23,7 +22,7 @@ class TwitterBot:
             tweet (str): The text to tweet.
         """
         self.tweet = tweet
-        self.api = self.create_api()
+        self.client = self.create_client()
 
     @property
     def tweet(self) -> str:
@@ -48,14 +47,11 @@ class TwitterBot:
         self.consumer_secret = os.getenv("CONSUMER_SECRET")
         self.access_token = os.getenv("ACCESS_TOKEN")
         self.access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
-
+        self.bearer_token = os.getenv("BEARER_TOKEN")
         return self
 
     def create_api(self) -> API:
         """Creates the tweepy API object.
-
-        Raises:
-            ClickException: raises an exception if it fails to get the ENV tokens.
 
         Returns:
             API: Returns tweepy API object.
@@ -66,22 +62,14 @@ class TwitterBot:
             consumer_key=self.consumer_key,
             consumer_secret=self.consumer_secret,
             access_token=self.access_token,
-            access_token_secret=self.access_token_secret
+            access_token_secret=self.access_token_secret,
         )
-        auth = tweepy.OAuth2AppHandler(self.consumer_key, self.consumer_secret)
-        # auth.set_access_token(self.access_token, self.access_token_secret)
-        api = tweepy.API(auth)
-        try:
-            api.verify_credentials()
-        except tweepy.error.TweepError as error:
-            message = str(error)
-            raise click.ClickException(message) from error
-        click.echo("tweepy api created")
-        return api
+
+        return client
 
     def send(self) -> None:
         """Tweet functionality of TwitterBot."""
-        self.api.update_status(self.tweet)
+        self.client.create_tweet(text=self.tweet)
 
 
 def validate_tweet(tweet: str) -> bool:
