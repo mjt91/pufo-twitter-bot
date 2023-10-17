@@ -14,15 +14,6 @@ max_attempts=5
 # Counter for the attempts
 attempts=0
 
-# Get the current day of the week (1 = Monday, 7 = Sunday)
-current_day=$(date +%u)
-
-# Check if today is Friday (day 5)
-if [ "$current_day" -ne 5 ]; then
-    echo "Today is not Friday. Exiting."
-    exit 0
-fi
-
 # Loop until the script succeeds or the maximum number of attempts is reached
 while true; do
     attempts=$((attempts + 1))
