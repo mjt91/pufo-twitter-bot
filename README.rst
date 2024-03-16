@@ -68,7 +68,7 @@ If you want to install inside a docker container:
 .. code:: console
 
    $ docker build -t pufo-bot .
-   $ docker run --env-file .env pufo-bot  
+   $ docker run --env-file .env pufo-bot
 
 I installed it as a cronjob, see `cronjob` file.
 

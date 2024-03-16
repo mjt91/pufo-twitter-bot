@@ -17,25 +17,25 @@ attempts=0
 # Loop until the script succeeds or the maximum number of attempts is reached
 while true; do
     attempts=$((attempts + 1))
-    
+
     echo "Attempt $attempts..."
-    
+
     # Run the Python script and capture its exit status
     run_python_script
-    
+
     exit_status=$?
-    
+
     if [ $exit_status -eq 0 ]; then
         echo "Script succeeded!"
         exit 0
     else
         echo "Script failed with exit code $exit_status."
-        
+
         if [ $attempts -ge $max_attempts ]; then
             echo "Maximum number of attempts reached. Exiting."
             exit 1
         fi
-        
+
         # Sleep for a while before the next attempt (adjust the sleep duration as needed)
         sleep 5
     fi
