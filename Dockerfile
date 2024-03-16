@@ -1,9 +1,6 @@
 # Specify base image
 FROM python:3.9-slim-buster
 
-# # Install cron
-RUN apt-get update && apt-get -y install cron vim
-
 # Copy requirements first to leverage Docker caching
 COPY ./requirements.txt /app/requirements.txt
 
