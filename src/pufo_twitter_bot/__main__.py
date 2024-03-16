@@ -4,10 +4,10 @@ from pathlib import Path
 import click
 
 import pufo_twitter_bot
-from .authors import opendatanames
-from .authors import randomnames
-from .books import randombuch
-from .bot.twitter import TwitterBot
+from pufo_twitter_bot.authors import opendatanames
+from pufo_twitter_bot.authors import randomnames
+from pufo_twitter_bot.books import randombuch
+from pufo_twitter_bot.bot.twitter import TwitterBot
 
 FIRST_NAMES: Path = Path(pufo_twitter_bot.__file__).parent / "data/first-names.json"
 LAST_NAMES: Path = Path(pufo_twitter_bot.__file__).parent / "data/last-names.txt"
@@ -70,7 +70,7 @@ def main(count: int, gender: str, source: str, tweet: bool) -> None:
 
     for i, author in enumerate(author_list.authors):
         book = book_list[i]
-        entry = f"{i+1}. '{book!r}' von {author.firstname} {author.lastname}"
+        entry = f"{i+1}. {book!r} von {author.firstname} {author.lastname}"
         click.echo(entry)
         if tweet:
             if i == 0:

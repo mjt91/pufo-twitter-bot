@@ -1,0 +1,1 @@
+0 9 * * FRI docker run --env-file .env pufo-bot

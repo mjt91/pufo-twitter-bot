@@ -63,6 +63,16 @@ You can install *Pufo Twitter Bot* via pip_ from PyPI_:
    $ pip install pufo-twitter-bot
 
 
+If you want to install inside a docker container:
+
+.. code:: console
+
+   $ docker build -t pufo-bot .
+   $ docker run --env-file .env pufo-bot
+
+I installed it as a cronjob, see `cronjob` file.
+
+
 Usage
 -----
 
