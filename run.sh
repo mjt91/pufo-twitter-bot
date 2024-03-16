@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Set PYTHONPATH to include /app/my_module
 export PYTHONPATH=/app/src
