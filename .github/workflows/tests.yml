@@ -119,7 +119,7 @@ jobs:
       - name: Download coverage data
         uses: actions/download-artifact@v4.1.4
         with:
-          name: coverage-data
+          name: coverage-data-${{ matrix.runs-on }}
 
       - name: Combine coverage data and display human readable report
         run: |
