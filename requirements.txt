@@ -5,7 +5,7 @@ charset-normalizer==3.3.2; python_full_version >= "3.7.0" and python_version >= 
 click==8.1.7; python_version >= "3.7"
 colorama==0.4.6; python_version >= "3.7" and python_full_version < "3.0.0" and platform_system == "Windows" or platform_system == "Windows" and python_version >= "3.7" and python_full_version >= "3.7.0"
 desert==2022.9.22; python_version >= "3.6"
-idna==3.6; python_version >= "3.7"
+idna==3.7; python_version >= "3.7"
 marshmallow==3.21.1; python_version >= "3.8"
 mypy-extensions==1.0.0; python_version >= "3.6"
 oauthlib==3.2.2; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.7"
