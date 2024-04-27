@@ -1,4 +1,5 @@
 """Random book titles generator from the buchtitelgenerator.de page."""
+
 from typing import List
 
 import click

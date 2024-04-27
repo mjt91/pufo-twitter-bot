@@ -53,6 +53,9 @@ types-requests = "^2.31.0"
 [tool.poetry.scripts]
 pufo-twitter-bot = "pufo_twitter_bot.__main__:main"
 
+[tool.poetry.group.dev.dependencies]
+isort = "^5.13.2"
+
 [tool.coverage.paths]
 source = ["src", "*/site-packages"]
 

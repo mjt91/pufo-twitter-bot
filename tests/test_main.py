@@ -1,4 +1,5 @@
 """Test cases for the __main__ module."""
+
 import random
 from unittest.mock import Mock
 from unittest.mock import patch

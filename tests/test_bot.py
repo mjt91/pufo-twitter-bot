@@ -1,4 +1,5 @@
 """Test cases for the bot module."""
+
 # import os
 from typing import Any
 from unittest.mock import Mock

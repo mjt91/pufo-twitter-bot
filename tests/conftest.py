@@ -1,4 +1,5 @@
 """Package-wide test fixtures."""
+
 import os
 from typing import Any
 from unittest.mock import Mock

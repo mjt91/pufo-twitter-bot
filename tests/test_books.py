@@ -1,4 +1,5 @@
 """Test cases for the books module."""
+
 from unittest import mock
 from unittest.mock import Mock
 

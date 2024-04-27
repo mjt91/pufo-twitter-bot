@@ -1,4 +1,5 @@
 """Script to parse the fallback data from offenedaten-koeln.de, version 1."""
+
 import csv
 import glob
 import json

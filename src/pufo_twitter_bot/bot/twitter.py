@@ -1,4 +1,5 @@
 """The twitter functionalities of pufo-twitter-bot."""
+
 from __future__ import annotations
 
 import os

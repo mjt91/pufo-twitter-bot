@@ -1,4 +1,5 @@
 """Client for the randomname.de REST API, version 1."""
+
 from dataclasses import dataclass
 from typing import List
 

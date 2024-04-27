@@ -1,4 +1,5 @@
 """Test cases for the authors module."""
+
 import json
 import random
 from collections.abc import Iterator
