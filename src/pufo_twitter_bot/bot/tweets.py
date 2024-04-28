@@ -1,16 +1,17 @@
 """Download all historical tweets from PUFO BOT."""
 
+from typing import Any
 import csv
 import datetime
 import json
 from pathlib import Path
 
-import tweepy
+import tweepy  # type: ignore
 
 from pufo_twitter_bot.bot.twitter import TwitterBot
 
 
-def get_tweets(client, username: str = "BotPufo"):
+def get_tweets(client: Any, username: str = "BotPufo") -> None:
     """Pulls 3,200 most recent tweets for specified username and saves to file."""
     # client = tweepy.Client(TWITTER_BEARER_TOKEN)
     user_id = client.client.get_user(username=username).data.id
@@ -45,7 +46,7 @@ def get_tweets(client, username: str = "BotPufo"):
     print("Done!")
 
 
-def get_all_tweets(client, username="BotPufo"):
+def get_all_tweets(client: Any, username: str = "BotPufo") -> None:
     """Download recent tweets by username."""
     # Initialize a list to hold all the tweepy Tweets
     alltweets = []
