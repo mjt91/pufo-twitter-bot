@@ -48,7 +48,7 @@ pre-commit-hooks = ">=4.1.0"
 sphinx-rtd-theme = ">=0.5.1"
 sphinx-click = ">=2.6.0"
 Pygments = ">=2.8.1"
-types-requests = "^2.31.0"
+types-requests = "^2.32.0"
 
 [tool.poetry.scripts]
 pufo-twitter-bot = "pufo_twitter_bot.__main__:main"
