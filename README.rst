@@ -32,6 +32,8 @@ Pufo Twitter Bot 🛸
    :target: https://github.com/psf/black
    :alt: Black
 
+**Important Note: As of August 2024 the source site buchtitelgenerator.de is down. Thus the project is on hold till I find time to build a solution. Looking into LLM integration as well.**
+
 
 Features 🚀
 -----------
