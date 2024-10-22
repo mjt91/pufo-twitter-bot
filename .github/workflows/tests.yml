@@ -74,7 +74,8 @@ jobs:
       - name: Run Nox
         run: |
           nox --force-color --python=${{ matrix.python-version }}
-
+      - name: List files for debugging
+        run: ls -al
       - name: Upload coverage data
         if: always() && matrix.session == 'tests'
         uses: "actions/upload-artifact@v3"
