@@ -82,6 +82,7 @@ jobs:
           name: coverage-data
           path: .coverage.*
           include-hidden-files: true
+          overwrite: true
           
       - name: Upload documentation
         if: matrix.session == 'docs-build'
