@@ -83,6 +83,7 @@ jobs:
           name: coverage-data
           path: .flake8
           if-no-files-found: error
+          include-hidden-files: true
           
       - name: Upload documentation
         if: matrix.session == 'docs-build'
