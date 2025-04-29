@@ -17,8 +17,8 @@ def main():
         print(f"{book.title} - {book.author.name}")
 
     # Save to file
-    generator.save_to_file(books, "generated_pairs.json")
-    print("\nResults saved to 'generated_pairs.json'")
+    generator.save_to_file(books, "generated_books.json")
+    print("\nResults saved to 'generated_books.json'")
 
 
 if __name__ == "__main__":

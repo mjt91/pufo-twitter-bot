@@ -111,15 +111,13 @@ class ChatGPTGenerator:
             logger.error(f"Error generating book-author pairs: {str(e)}")
             raise
 
-    def save_to_file(
-        self, pairs: List[BookAuthorPair], filepath: str = "generated_pairs.json"
-    ):
+    def save_to_file(self, books: List[Book], filepath: str = "generated_pairs.json"):
         """Save generated pairs to a JSON file.
 
         Args:
             pairs: List of BookAuthorPair objects to save
             filepath: Path to save the JSON file
         """
-        data = [{"title": pair.title, "author": pair.author} for pair in pairs]
+        data = [{"title": book.title, "author": book.author.name} for book in books]
         with open(filepath, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
