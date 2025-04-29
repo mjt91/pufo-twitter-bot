@@ -6,9 +6,6 @@ from pathlib import Path
 from textwrap import dedent
 
 import nox
-from nox_poetry import Session
-from nox_poetry import session
-
 
 package = "pufo_twitter_bot"
 python_versions = ["3.9", "3.8"]
@@ -21,19 +18,13 @@ nox.options.sessions = (
 )
 
 
-def activate_virtualenv_in_precommit_hooks(session: Session) -> None:
+def activate_virtualenv_in_precommit_hooks(session) -> None:
     """Activate virtualenv in hooks installed by pre-commit.
 
-    This function patches git hooks installed by pre-commit to activate the
-    session's virtual environment. This allows pre-commit to locate hooks in
-    that environment when invoked from git.
-
-    Args:
-        session: The Session object.
+    This patches git hooks installed by pre-commit to activate the session's
+    virtual environment. This allows pre-commit to locate hooks in that environment
+    when invoked from git.
     """
-    # if session.bin is None:
-    #     return
-
     virtualenv = session.env.get("VIRTUAL_ENV")
     if virtualenv is None:
         return
@@ -72,8 +63,8 @@ def activate_virtualenv_in_precommit_hooks(session: Session) -> None:
         hook.write_text("\n".join(lines))
 
 
-@session(name="pre-commit", python=python_versions[0])
-def precommit(session: Session) -> None:
+@nox.session(name="pre-commit", python=python_versions[0])
+def precommit(session):
     """Lint using pre-commit."""
     args = session.posargs or ["run", "--all-files", "--show-diff-on-failure"]
     session.install(
@@ -93,16 +84,20 @@ def precommit(session: Session) -> None:
         activate_virtualenv_in_precommit_hooks(session)
 
 
-@session(python=python_versions[0])
-def safety(session: Session) -> None:
-    """Scan dependencies for insecure packages."""
-    requirements = session.poetry.export_requirements()
+@nox.session(python=python_versions[0])
+def safety(session):
+    """Scan dependencies for insecure packages.
+
+    This version assumes you have a requirements.txt file available.
+    You can generate it with:
+      pip freeze > requirements.txt
+    """
     session.install("safety")
-    session.run("safety", "check", f"--file={requirements}", "--bare")
+    session.run("safety", "check", "--file=requirements.txt", "--bare")
 
 
-@session(python=python_versions)
-def mypy(session: Session) -> None:
+@nox.session(python=python_versions)
+def mypy(session):
     """Type-check using mypy."""
     args = session.posargs or ["src", "tests", "docs/conf.py"]
     session.install(".")
@@ -112,8 +107,8 @@ def mypy(session: Session) -> None:
         session.run("mypy", f"--python-executable={sys.executable}", "noxfile.py")
 
 
-@session(python=python_versions)
-def tests(session: Session) -> None:
+@nox.session(python=python_versions)
+def tests(session):
     """Run the test suite."""
     session.install(".")
     session.install("coverage[toml]", "pytest", "pygments", "pytest-mock")
@@ -124,8 +119,8 @@ def tests(session: Session) -> None:
             session.notify("coverage")
 
 
-@session(python=python_versions[0])
-def coverage(session: Session) -> None:
+@nox.session(python=python_versions[0])
+def coverage(session):
     """Produce the coverage report."""
     args = session.posargs or ["report"]
 
@@ -137,16 +132,16 @@ def coverage(session: Session) -> None:
     session.run("coverage", *args)
 
 
-@session(python=python_versions[0])
-def typeguard(session: Session) -> None:
+@nox.session(python=python_versions[0])
+def typeguard(session):
     """Runtime type checking using Typeguard."""
     session.install(".")
     session.install("pytest", "pytest-mock", "typeguard", "pygments")
     session.run("pytest", f"--typeguard-packages={package}", *session.posargs)
 
 
-@session(python=python_versions)
-def xdoctest(session: Session) -> None:
+@nox.session(python=python_versions)
+def xdoctest(session):
     """Run examples with xdoctest."""
     args = session.posargs or ["all"]
     session.install(".")
@@ -154,8 +149,8 @@ def xdoctest(session: Session) -> None:
     session.run("python", "-m", "xdoctest", package, *args)
 
 
-@session(name="docs-build", python="3.8")  # TODO: update docs-build from cookiecutter
-def docs_build(session: Session) -> None:
+@nox.session(name="docs-build", python="3.8")
+def docs_build(session):
     """Build the documentation."""
     args = session.posargs or ["docs", "docs/_build"]
     session.install(".")
@@ -168,8 +163,8 @@ def docs_build(session: Session) -> None:
     session.run("sphinx-build", *args)
 
 
-@session(python=python_versions[0])
-def docs(session: Session) -> None:
+@nox.session(python=python_versions[0])
+def docs(session):
     """Build and serve the documentation with live reloading on file changes."""
     args = session.posargs or ["--open-browser", "docs", "docs/_build"]
     session.install(".")
