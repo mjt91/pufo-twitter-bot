@@ -17,6 +17,7 @@ dependencies = [
     "desert>=2020.11.18",
     "beautifulsoup4>=4.9.3",
     "tweepy>=3.10.0",
+    "pydantic>=2.10.6",
 ]
 
 [project.urls]
