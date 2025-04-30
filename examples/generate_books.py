@@ -1,6 +1,6 @@
 """Example script to demonstrate the ChatGPT generator usage."""
 
-from pufo_twitter_bot.chatgpt_generator import ChatGPTGenerator
+from pufo_twitter_bot.books.chatgpt_generator import ChatGPTGenerator
 
 
 def main():

@@ -7,8 +7,8 @@ from dataclasses import dataclass
 import json
 import logging
 
-from .config import load_env
-from .models import Book, Author
+from pufo_twitter_bot.config import load_env
+from pufo_twitter_bot.models import Book, Author
 
 logger = logging.getLogger(__name__)
 
