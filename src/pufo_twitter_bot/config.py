@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 
-def load_env():
+def load_env() -> None:
     """Load environment variables from .env file."""
     # Get the project root directory
     project_root = Path(__file__).parent.parent.parent

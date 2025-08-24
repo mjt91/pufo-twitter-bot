@@ -1,7 +1,7 @@
 """Module for generating random authors and books using ChatGPT API."""
 
 import os
-from typing import List, Literal
+from typing import List, Literal, Optional
 import openai
 from dataclasses import dataclass
 import json
@@ -27,7 +27,7 @@ class BookAuthorPair:
 class ChatGPTGenerator:
     """Class to handle ChatGPT API interactions for generating random books and authors."""
 
-    def __init__(self, api_key: str = None):
+    def __init__(self, api_key: Optional[str] = None):
         """Initialize the ChatGPT generator.
 
         Args:
@@ -68,7 +68,7 @@ class ChatGPTGenerator:
             {{"title": "Die Vermessung der Welt", "author": "Daniel Kehlmann"}}
         ]"""
 
-    def generate_pairs(self, count: int = 5) -> List[BookAuthorPair]:
+    def generate_pairs(self, count: int = 5) -> List[Book]:
         """Generate random book-author pairs using ChatGPT.
 
         Args:
@@ -91,6 +91,8 @@ class ChatGPTGenerator:
 
             # Parse the response
             content = response.choices[0].message.content
+            if content is None:
+                raise ValueError("No content received from ChatGPT")
             data = json.loads(content)
 
             # Convert to BookAuthorPair objects
@@ -111,7 +113,9 @@ class ChatGPTGenerator:
             logger.error(f"Error generating book-author pairs: {str(e)}")
             raise
 
-    def save_to_file(self, books: List[Book], filepath: str = "generated_pairs.json"):
+    def save_to_file(
+        self, books: List[Book], filepath: str = "generated_pairs.json"
+    ) -> None:
         """Save generated pairs to a JSON file.
 
         Args:

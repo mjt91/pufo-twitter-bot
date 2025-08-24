@@ -1,10 +1,10 @@
 """Random book titles generator from the buchtitelgenerator.de page."""
 
-from typing import List
+from typing import List, cast
 
 import click
 import requests  # type: ignore
-from bs4 import BeautifulSoup  # type: ignore
+from bs4 import BeautifulSoup
 
 
 # BOOK_URL = "https://www.buchtitelgenerator.de/"
@@ -30,7 +30,13 @@ def buchtitelgenerator() -> List[str]:
             # As of November 2022 the site got slight changes that now
             # returns a list of paragraphs, the two last ones are empty HTML p-tags
             container = soup.find("div", class_="entry clr")
-            paragraphs = container.find_all("p")
+            if container is None:
+                raise ValueError("Could not find content container on the page")
+            # Cast to help mypy understand this is a bs4.Tag
+            from bs4 import Tag
+
+            container_tag = cast(Tag, container)
+            paragraphs = container_tag.find_all("p")
             # Only first five entries
             books = [book.text for book in paragraphs[:5]]
 
