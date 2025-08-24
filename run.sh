@@ -5,7 +5,7 @@ export PYTHONPATH=/app/src
 
 # Function to run the Python script
 run_python_script() {
-    python /app/src/pufo_twitter_bot/__main__.py -c 5 -s offenedaten --tweet
+    python /app/src/pufo_twitter_bot/__main__.py -c 5 -g a --tweet
 }
 
 # Maximum number of attempts

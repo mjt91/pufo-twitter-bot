@@ -37,8 +37,32 @@ def test_buchtitelgenerator_raises(mock_get: Mock) -> None:
         randombuch.buchtitelgenerator()
 
 
-@pytest.mark.skip(reason="This causes traffic for buchtitelgenerator.de!")
-def test_buchtitel_generator() -> None:
-    """Books is a non-empty list."""
-    books = randombuch.buchtitelgenerator()
-    assert not (len(books) == 0)
+@mock.patch("pufo_twitter_bot.books.chatgpt_generator.load_env")
+@mock.patch.dict("os.environ", {}, clear=True)
+def test_chatgpt_generator_initialization(mock_load_env: Mock) -> None:
+    """Test ChatGPT generator can be initialized with API key."""
+    from pufo_twitter_bot.books.chatgpt_generator import ChatGPTGenerator
+
+    with pytest.raises(ValueError, match="OpenAI API key is required"):
+        ChatGPTGenerator(api_key=None)
+
+
+@mock.patch("pufo_twitter_bot.books.chatgpt_generator.openai.chat.completions.create")
+def test_chatgpt_generator_generates_pairs(mock_openai_create: Mock) -> None:
+    """Test ChatGPT generator returns list of books."""
+    from pufo_twitter_bot.books.chatgpt_generator import ChatGPTGenerator
+
+    # Mock the OpenAI response
+    mock_response = Mock()
+    mock_response.choices = [Mock()]
+    mock_response.choices[
+        0
+    ].message.content = '{"books": [{"title": "Test Book", "author": "Test Author"}]}'
+    mock_openai_create.return_value = mock_response
+
+    generator = ChatGPTGenerator(api_key="test-key")
+    books = generator.generate_pairs(count=1)
+
+    assert len(books) == 1
+    assert books[0].title == "Test Book"
+    assert books[0].author.name == "Test Author"
