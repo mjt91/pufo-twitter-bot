@@ -1,12 +1,50 @@
+# Python
 .mypy_cache/
-/.coverage
-/.nox/
-/.python-version
-/.pytype/
-/dist/
-/docs/_build/
-/src/*.egg-info/
 __pycache__/
-.vscode
-.env
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Testing and coverage
+/.coverage
 .coverage.*
+/.nox/
+/.pytest_cache/
+/.pytype/
+htmlcov/
+.tox/
+
+# Build and distribution
+/dist/
+/build/
+*.egg-info/
+/src/*.egg-info/
+
+# Documentation
+/docs/_build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+/.python-version
